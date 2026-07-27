@@ -1,0 +1,41 @@
+# Node modules
+node_modules/
+
+# Entornos y secretos
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Directorios del sistema y editores
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporales / Cache
+.npm/
+.eslintcache
+.stylelintcache
+
+# (Opcional) Ignorar configuraciones locales de agentes si no se desean versionar
+# .agents/

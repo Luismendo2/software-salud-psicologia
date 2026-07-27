@@ -1,0 +1,661 @@
+/* ==========================================================================
+   PsiAgenda — Global Styles (global.css)
+   
+   Importa Bootstrap, aplica los design tokens del proyecto y establece
+   los overrides de Bootstrap para que todo el UI se sienta cohesivo.
+   ========================================================================== */
+
+@import './variables.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import './portal.css';
+@import './clinical.css';
+
+/* ── Reset y base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-900);
+  background-color: var(--color-background);
+  line-height: 1.6;
+}
+
+/* ── Tipografía global ── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  line-height: 1.3;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+
+/* ── Overrides de Bootstrap — Cards ── */
+/* Las cards en PsiAgenda son sin borde, con sombra suave 
+   para lograr un efecto de profundidad sutil y limpio */
+.card {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Overrides de Bootstrap — Botones ── */
+.btn {
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+  background-color: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+}
+.btn-primary:active,
+.btn-primary:focus-visible {
+  background-color: var(--color-primary-700);
+  border-color: var(--color-primary-700);
+}
+
+.btn-outline-secondary {
+  color: var(--color-gray-600);
+  border-color: var(--color-gray-300);
+}
+.btn-outline-secondary:hover {
+  background-color: var(--color-gray-50);
+  color: var(--color-gray-800);
+  border-color: var(--color-gray-400);
+}
+
+/* ── Overrides de Bootstrap — Modals ── */
+.modal-content {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--color-gray-100);
+  padding: var(--space-lg);
+}
+
+.modal-body {
+  padding: var(--space-lg);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--color-gray-100);
+  padding: var(--space-md) var(--space-lg);
+}
+
+/* ── Overrides de Bootstrap — Form Controls ── */
+.form-control,
+.form-select {
+  border-radius: var(--radius-md);
+  border-color: var(--color-gray-300);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+.form-label {
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  margin-bottom: 0.375rem;
+}
+
+/* ── Badges de estado de citas ──
+   La firma visual del módulo de agenda: pequeñas píldoras de color
+   que comunican de un vistazo el estado emocional de cada slot */
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge-status--pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge-status--confirmed {
+  background-color: var(--color-accent-50);
+  color: var(--color-accent-600);
+}
+
+.badge-status--completed {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge-status--cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-status--no-show {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-600);
+}
+
+/* ── Badges de tipo de cita ── */
+.badge-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-medium);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.badge-type--presencial {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+}
+
+.badge-type--virtual {
+  background-color: #faf5ff;
+  color: #7c3aed;
+}
+
+/* ── Layout global — App shell ── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--space-lg);
+  min-width: 0; /* previene overflow del calendario */
+  overflow-x: hidden;
+}
+
+@media (min-width: 992px) {
+  .app-main {
+    margin-left: var(--sidebar-width);
+    padding: var(--space-xl);
+  }
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-gray-100);
+  display: none;
+  flex-direction: column;
+  z-index: 1030;
+  overflow-y: auto;
+}
+
+@media (min-width: 992px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+.sidebar-brand {
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.sidebar-brand h1 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-600);
+  margin: 0;
+}
+
+.sidebar-brand span {
+  font-size: 1.25rem;
+}
+
+.sidebar-nav {
+  padding: var(--space-sm) var(--space-md);
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.625rem var(--space-md);
+  border-radius: var(--radius-md);
+  color: var(--color-gray-600);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  margin-bottom: 2px;
+}
+
+.sidebar-link:hover {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-600);
+}
+
+.sidebar-link.active {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sidebar-link svg,
+.sidebar-link .sidebar-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.sidebar-section-title {
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: var(--space-lg) var(--space-md) var(--space-xs);
+}
+
+/* ── Mobile Navbar ── */
+.mobile-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-gray-100);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+@media (min-width: 992px) {
+  .mobile-navbar {
+    display: none;
+  }
+}
+
+.mobile-navbar-brand {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-600);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* ── Page headers ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* ── FullCalendar overrides ──
+   Se eliminan los bordes agresivos y se alinea con nuestro
+   sistema de diseño usando variables CSS */
+.fc {
+  --fc-border-color: var(--color-gray-200);
+  --fc-today-bg-color: var(--color-primary-50);
+  --fc-event-border-color: transparent;
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: var(--color-gray-50);
+}
+
+.fc .fc-toolbar-title {
+  font-family: var(--font-family);
+  font-size: 1.25rem !important;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-800);
+}
+
+/* Permitir que la barra de herramientas del calendario salte de línea en móviles para no apretar los textos y botones */
+.fc .fc-header-toolbar {
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.fc .fc-toolbar-chunk {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.fc .fc-button {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-md);
+  padding: 0.375rem 0.75rem;
+  text-transform: capitalize;
+}
+
+.fc .fc-button-primary {
+  background-color: var(--color-surface);
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-700);
+}
+
+.fc .fc-button-primary:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-400);
+  color: var(--color-gray-900);
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background-color: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  color: white;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0;
+  text-decoration: none;
+}
+
+.fc .fc-daygrid-day-number {
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+  text-decoration: none;
+  padding: 0.375rem 0.5rem;
+}
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background-color: var(--color-primary-500);
+  color: white;
+  border-radius: var(--radius-pill);
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc .fc-event {
+  border-radius: var(--radius-sm);
+  padding: 2px 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border: none;
+}
+
+/* Forzar que el texto interno herede el color que le damos al contenedor */
+.fc .fc-event-main,
+.fc .fc-event-time,
+.fc .fc-event-title {
+  color: inherit !important;
+}
+
+.fc .fc-timegrid-slot {
+  height: 3rem;
+}
+
+/* Eventos coloreados por estado */
+.fc-event--pending {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border-left: 3px solid var(--color-warning) !important;
+}
+
+.fc-event--confirmed {
+  background-color: var(--color-accent-50) !important;
+  color: var(--color-accent-600) !important;
+  border-left: 3px solid var(--color-accent-500) !important;
+}
+
+.fc-event--completed {
+  background-color: #dcfce7 !important;
+  color: #166534 !important;
+  border-left: 3px solid var(--color-success) !important;
+}
+
+.fc-event--cancelled {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border-left: 3px solid var(--color-danger) !important;
+  text-decoration: line-through;
+}
+
+.fc-event--no-show {
+  background-color: var(--color-gray-100) !important;
+  color: var(--color-gray-500) !important;
+  border-left: 3px solid var(--color-gray-400) !important;
+}
+
+/* ── Scrollbar sutil ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-300);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Accessibility — foco visible ── */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Booking page (pública) ── */
+.booking-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-background) 50%, var(--color-accent-50) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.booking-card {
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xl);
+}
+
+.booking-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.booking-header h1 {
+  font-size: 1.5rem;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-xs);
+}
+
+.booking-header p {
+  color: var(--color-gray-500);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ── Steps wizard ── */
+.steps-indicator {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.step-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-gray-200);
+  transition: all var(--transition-base);
+}
+
+.step-dot.active {
+  width: 1.5rem;
+  background-color: var(--color-primary-500);
+}
+
+.step-dot.completed {
+  background-color: var(--color-accent-500);
+}
+
+/* ── Slot picker ── */
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: var(--space-sm);
+}
+
+.slot-btn {
+  padding: 0.5rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-gray-700);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.slot-btn:hover {
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-600);
+  background-color: var(--color-primary-50);
+}
+
+.slot-btn.selected {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+/* ── Availability settings ── */
+.day-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.day-row:last-child {
+  border-bottom: none;
+}
+
+.day-label {
+  width: 6rem;
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+}
+
+.day-row.disabled .day-label {
+  color: var(--color-gray-400);
+}
+
+/* ── Confirmation card ── */
+.confirmation-card {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.confirmation-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #dcfce7;
+  color: var(--color-success);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+  font-size: 1.75rem;
+}
+
+.confirmation-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--color-gray-600);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-xs);
+}
