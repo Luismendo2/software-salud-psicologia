@@ -1,0 +1,232 @@
+/* ==========================================================================
+   authMock.js — Datos de ejemplo para Seguridad y Privacidad (Feature 004)
+   
+   Simula usuarios con roles, sesiones activas, tokens de recuperación,
+   y registros de auditoría para el panel de administrador.
+   ========================================================================== */
+
+function relativeDate(dayOffset, hour = 10, minute = 0) {
+  const d = new Date();
+  d.setDate(d.getDate() + dayOffset);
+  d.setHours(hour, minute, 0, 0);
+  return d.toISOString();
+}
+
+/* ── Usuarios del sistema ── */
+export const MOCK_USERS = [
+  {
+    id: 'usr-1',
+    email: 'maria.lopez@psiagenda.co',
+    firstName: 'María',
+    lastName: 'López',
+    role: 'PSYCHOLOGIST',
+    avatar: null,
+    isActive: true,
+    lastLogin: relativeDate(0, 8, 15),
+    createdAt: relativeDate(-180),
+    mfaEnabled: false,
+  },
+  {
+    id: 'usr-2',
+    email: 'admin@psiagenda.co',
+    firstName: 'Administrador',
+    lastName: 'Sistema',
+    role: 'ADMIN',
+    avatar: null,
+    isActive: true,
+    lastLogin: relativeDate(-1, 14, 30),
+    createdAt: relativeDate(-365),
+    mfaEnabled: false,
+  },
+  {
+    id: 'usr-3',
+    email: 'carlos.mendoza@correo.co',
+    firstName: 'Carlos',
+    lastName: 'Mendoza',
+    role: 'PATIENT',
+    avatar: null,
+    isActive: true,
+    lastLogin: relativeDate(-2, 9),
+    createdAt: relativeDate(-90),
+    mfaEnabled: false,
+  },
+  {
+    id: 'usr-4',
+    email: 'ana.secretaria@psiagenda.co',
+    firstName: 'Ana',
+    lastName: 'Gómez',
+    role: 'ASSISTANT',
+    avatar: null,
+    isActive: true,
+    lastLogin: relativeDate(0, 7, 45),
+    createdAt: relativeDate(-60),
+    mfaEnabled: false,
+  },
+];
+
+/* ── Credenciales mock para login ── */
+export const MOCK_CREDENTIALS = {
+  'maria.lopez@psiagenda.co': { password: 'Demo@1234', userId: 'usr-1' },
+  'admin@psiagenda.co': { password: 'Admin@2026', userId: 'usr-2' },
+  'carlos.mendoza@correo.co': { password: 'Paciente@1', userId: 'usr-3' },
+  'ana.secretaria@psiagenda.co': { password: 'Asistente@1', userId: 'usr-4' },
+};
+
+/* ── Roles del sistema ── */
+export const ROLE_LABELS = {
+  ADMIN: 'Administrador',
+  PSYCHOLOGIST: 'Psicólogo',
+  ASSISTANT: 'Asistente',
+  PATIENT: 'Paciente',
+};
+
+export const ROLE_COLORS = {
+  ADMIN: { bg: '#fef3c7', color: '#92400e' },
+  PSYCHOLOGIST: { bg: '#dbeafe', color: '#1e40af' },
+  ASSISTANT: { bg: '#f0fdfa', color: '#0d9488' },
+  PATIENT: { bg: '#f3f4f6', color: '#4b5563' },
+};
+
+/* ── Registro de auditoría mock ── */
+export const MOCK_AUDIT_LOGS = [
+  {
+    id: 'aud-1',
+    userId: 'usr-1',
+    userName: 'Dra. María López',
+    userRole: 'PSYCHOLOGIST',
+    action: 'READ',
+    resourceType: 'ClinicalRecord',
+    resourceId: 'cr-1',
+    resourceLabel: 'HC de Carlos Mendoza',
+    ipAddress: '192.168.1.42',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(0, 9, 12),
+    metadata: null,
+  },
+  {
+    id: 'aud-2',
+    userId: 'usr-1',
+    userName: 'Dra. María López',
+    userRole: 'PSYCHOLOGIST',
+    action: 'CREATE',
+    resourceType: 'SessionNote',
+    resourceId: 'note-3',
+    resourceLabel: 'Nota sesión 13 — Carlos Mendoza',
+    ipAddress: '192.168.1.42',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(0, 9, 35),
+    metadata: { templateId: 'tpl-1' },
+  },
+  {
+    id: 'aud-3',
+    userId: 'usr-1',
+    userName: 'Dra. María López',
+    userRole: 'PSYCHOLOGIST',
+    action: 'UPDATE',
+    resourceType: 'SessionNote',
+    resourceId: 'note-3',
+    resourceLabel: 'Nota sesión 13 — Carlos Mendoza',
+    ipAddress: '192.168.1.42',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(0, 10, 5),
+    metadata: { fieldsChanged: ['situacion', 'pensamientos'] },
+  },
+  {
+    id: 'aud-4',
+    userId: 'usr-4',
+    userName: 'Ana Gómez',
+    userRole: 'ASSISTANT',
+    action: 'CREATE',
+    resourceType: 'Appointment',
+    resourceId: 'apt-15',
+    resourceLabel: 'Cita con Laura Gutiérrez',
+    ipAddress: '10.0.0.5',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15)',
+    timestamp: relativeDate(-1, 11, 22),
+    metadata: { type: 'PRESENCIAL' },
+  },
+  {
+    id: 'aud-5',
+    userId: 'usr-2',
+    userName: 'Administrador Sistema',
+    userRole: 'ADMIN',
+    action: 'READ',
+    resourceType: 'AuditLog',
+    resourceId: null,
+    resourceLabel: 'Consulta de auditoría',
+    ipAddress: '10.0.0.1',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(-1, 14, 0),
+    metadata: { filters: { resourceType: 'ClinicalRecord' } },
+  },
+  {
+    id: 'aud-6',
+    userId: 'usr-1',
+    userName: 'Dra. María López',
+    userRole: 'PSYCHOLOGIST',
+    action: 'UPDATE',
+    resourceType: 'ClinicalRecord',
+    resourceId: 'cr-1',
+    resourceLabel: 'HC de Carlos Mendoza — objetivos',
+    ipAddress: '192.168.1.42',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(-2, 16, 10),
+    metadata: { fieldsChanged: ['objectives'] },
+  },
+  {
+    id: 'aud-7',
+    userId: 'usr-3',
+    userName: 'Carlos Mendoza',
+    userRole: 'PATIENT',
+    action: 'READ',
+    resourceType: 'Appointment',
+    resourceId: 'apt-1',
+    resourceLabel: 'Ver cita del 15 de julio',
+    ipAddress: '181.52.100.200',
+    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6)',
+    timestamp: relativeDate(-3, 20, 45),
+    metadata: null,
+  },
+  {
+    id: 'aud-8',
+    userId: 'usr-1',
+    userName: 'Dra. María López',
+    userRole: 'PSYCHOLOGIST',
+    action: 'CREATE',
+    resourceType: 'Attachment',
+    resourceId: 'att-3',
+    resourceLabel: 'Registro de pensamientos — semana 12.jpg',
+    ipAddress: '192.168.1.42',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(-4, 15, 30),
+    metadata: { fileSize: 512000 },
+  },
+  {
+    id: 'aud-9',
+    userId: 'usr-1',
+    userName: 'Dra. María López',
+    userRole: 'PSYCHOLOGIST',
+    action: 'UPDATE',
+    resourceType: 'Patient',
+    resourceId: 'p6',
+    resourceLabel: 'Sofía Ramírez — cambio de estado a DISCHARGED',
+    ipAddress: '192.168.1.42',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(-14, 17, 0),
+    metadata: { statusFrom: 'ACTIVE', statusTo: 'DISCHARGED' },
+  },
+  {
+    id: 'aud-10',
+    userId: 'usr-2',
+    userName: 'Administrador Sistema',
+    userRole: 'ADMIN',
+    action: 'UPDATE',
+    resourceType: 'User',
+    resourceId: 'usr-4',
+    resourceLabel: 'Ana Gómez — asignación de rol ASSISTANT',
+    ipAddress: '10.0.0.1',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+    timestamp: relativeDate(-60, 9, 0),
+    metadata: { rolePrevious: null, roleNew: 'ASSISTANT' },
+  },
+];

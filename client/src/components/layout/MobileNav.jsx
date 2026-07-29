@@ -1,107 +1,87 @@
 /* ==========================================================================
-   MobileNav — Navbar superior para pantallas < 992px
+   MobileNav — Navegación móvil y header superior (Feature 004)
    
-   Muestra el logotipo y un botón hamburguesa que abre un Offcanvas
-   de Bootstrap con los mismos links del Sidebar. Solo es visible en móvil.
+   Solo visible en pantallas < 992px.
+   Incluye menú hamburguesa simplificado con integración de AuthContext.
    ========================================================================== */
 
-import { NavLink } from 'react-router-dom';
-import { useRef } from 'react';
+import { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { useAuth } from '../../features/auth/AuthContext';
+import { ROLE_LABELS } from '../../mocks/authMock';
 
 export default function MobileNav() {
-  const offcanvasRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const { user, logout, hasRole } = useAuth();
 
-  /**
-   * Cierra el offcanvas al hacer clic en un link.
-   * Usamos la API nativa de Bootstrap en lugar de useState
-   * porque Bootstrap ya maneja su propio estado internamente.
-   */
-  const handleLinkClick = () => {
-    const bsOffcanvas = window.bootstrap?.Offcanvas?.getInstance(offcanvasRef.current);
-    if (bsOffcanvas) bsOffcanvas.hide();
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  if (!user) return null;
 
   return (
     <>
-      {/* ── Barra superior fija ── */}
-      <nav className="mobile-navbar">
-        <button
-          className="btn btn-link p-0"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#mobileMenu"
-          aria-label="Abrir menú de navegación"
-          style={{ fontSize: '1.25rem', textDecoration: 'none' }}
-        >
-          ☰
-        </button>
-
-        <span className="mobile-navbar-brand">
+      <header className="mobile-navbar">
+        <Link to="/agenda" className="mobile-navbar-brand">
           <span>🧠</span> PsiAgenda
-        </span>
+        </Link>
+        <button 
+          className="btn btn-outline-secondary"
+          onClick={toggleMenu}
+          style={{ padding: '0.25rem 0.5rem' }}
+          aria-label="Menú"
+        >
+          {isOpen ? '✕' : '☰'}
+        </button>
+      </header>
 
-        {/* Espacio reservado para notificaciones o avatar */}
-        <div style={{ width: '2rem' }} />
-      </nav>
+      {/* ── Menú desplegable ── */}
+      {isOpen && (
+        <div style={{
+          backgroundColor: 'var(--color-surface)',
+          borderBottom: '1px solid var(--color-gray-200)',
+          position: 'sticky',
+          top: '53px',
+          zIndex: 1010,
+          padding: 'var(--space-md)',
+          boxShadow: 'var(--shadow-md)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--space-sm)'
+        }}>
+          <div style={{ paddingBottom: 'var(--space-sm)', borderBottom: '1px solid var(--color-gray-100)', marginBottom: 'var(--space-sm)' }}>
+            <div style={{ fontWeight: 'var(--font-weight-bold)' }}>{user.firstName} {user.lastName}</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)' }}>{ROLE_LABELS[user.role] || user.role}</div>
+          </div>
 
-      {/* ── Offcanvas con la navegación ── */}
-      <div
-        ref={offcanvasRef}
-        className="offcanvas offcanvas-start"
-        tabIndex="-1"
-        id="mobileMenu"
-        aria-labelledby="mobileMenuLabel"
-        style={{ width: 'var(--sidebar-width)' }}
-      >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="mobileMenuLabel"
-            style={{ fontWeight: 'var(--font-weight-bold)', color: 'var(--color-primary-600)' }}>
-            🧠 PsiAgenda
-          </h5>
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar" />
+          <NavLink to="/agenda" end className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+            📅 Agenda
+          </NavLink>
+
+          {hasRole(['ADMIN', 'PSYCHOLOGIST']) && (
+            <NavLink to="/historia-clinica" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+              📋 Historia clínica
+            </NavLink>
+          )}
+
+          {hasRole(['ADMIN']) && (
+            <NavLink to="/auditoria" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+              🛡️ Auditoría
+            </NavLink>
+          )}
+
+          <NavLink to="/configuracion" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+            🔒 Mi Cuenta
+          </NavLink>
+
+          <button 
+            className="btn btn-outline-secondary" 
+            onClick={() => { logout(); toggleMenu(); }}
+            style={{ textAlign: 'left', marginTop: 'var(--space-sm)', color: 'var(--color-danger)' }}
+          >
+            🚪 Cerrar sesión
+          </button>
         </div>
-
-        <div className="offcanvas-body p-0">
-          <nav className="sidebar-nav">
-            <div className="sidebar-section-title">Principal</div>
-
-            <NavLink to="/agenda" onClick={handleLinkClick}
-              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-              <span className="sidebar-icon">📅</span>
-              Agenda
-            </NavLink>
-
-            <NavLink to="/agenda/settings" onClick={handleLinkClick}
-              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-              <span className="sidebar-icon">⚙️</span>
-              Configuración de horarios
-            </NavLink>
-
-            <div className="sidebar-section-title">Clínica</div>
-
-            <span className="sidebar-link" style={{ opacity: 0.4, cursor: 'default' }}>
-              <span className="sidebar-icon">👥</span>
-              Pacientes
-            </span>
-
-            <span className="sidebar-link" style={{ opacity: 0.4, cursor: 'default' }}>
-              <span className="sidebar-icon">👥</span>
-              Pacientes
-            </span>
-
-            <NavLink to="/historia-clinica" onClick={handleLinkClick}
-              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-              <span className="sidebar-icon">📋</span>
-              Historia clínica
-            </NavLink>
-
-            <span className="sidebar-link" style={{ opacity: 0.4, cursor: 'default' }}>
-              <span className="sidebar-icon">💳</span>
-              Facturación
-            </span>
-          </nav>
-        </div>
-      </div>
+      )}
     </>
   );
 }

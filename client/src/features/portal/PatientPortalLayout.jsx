@@ -7,14 +7,14 @@
    En desktop usa una barra lateral compacta.
    ========================================================================== */
 
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
 
 export default function PatientPortalLayout() {
-  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    // Cuando exista auth, limpiar sesión y redirigir
-    navigate('/portal/login');
+    logout();
   };
 
   return (
@@ -24,7 +24,7 @@ export default function PatientPortalLayout() {
         <div className="portal-header-brand">
           <span className="portal-brand-icon">🧠</span>
           <span className="portal-brand-text">PsiAgenda</span>
-          <span className="portal-brand-badge">Paciente</span>
+          {user && <span className="portal-brand-badge">{user.firstName} {user.lastName}</span>}
         </div>
         <button
           className="portal-logout-btn"
@@ -76,11 +76,11 @@ export default function PatientPortalLayout() {
         </NavLink>
 
         <NavLink
-          to="/portal/perfil"
+          to="/portal/configuracion"
           className={({ isActive }) => `portal-tab ${isActive ? 'active' : ''}`}
         >
-          <span className="portal-tab-icon">👤</span>
-          <span className="portal-tab-label">Mi perfil</span>
+          <span className="portal-tab-icon">⚙️</span>
+          <span className="portal-tab-label">Configuración</span>
         </NavLink>
       </nav>
     </div>

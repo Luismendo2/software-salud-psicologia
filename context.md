@@ -34,12 +34,13 @@ Hemos construido toda la arquitectura visual e interactiva del módulo de citas 
 - [x] Desarrollo de **001-agenda** (Página pública y privada).
 - [x] Desarrollo de **002-portal-paciente** (Dashboard, formularios, firma digital, pagos).
 - [x] Desarrollo del front-end de **003-historia-clinica** (Notas enriquecidas, Archivos, Genograma).
+- [x] Desarrollo del front-end de **004-seguridad-privacidad** (Login, Roles, Configuración de Cuenta, Auditoría).
 
 ## Siguiente paso recomendado
 De acuerdo a tu directriz de **terminar primero todo el front-end antes de iniciar con bases de datos y backend**, el siguiente paso es:
 
-1. Iniciar el desarrollo del front-end de **004-seguridad-privacidad** (Autenticación, roles, auditoría, MFA).
-2. Revisar la especificación (spec.md) y plan (plan.md) de dicha feature para crear los componentes de login, recuperación de contraseña, y configuración de cuenta.
+1. Iniciar el desarrollo del front-end de **005-facturacion-pagos** (Facturas, ingresos, reportes financieros).
+2. Revisar la especificación (spec.md) y plan (plan.md) de dicha feature para crear los componentes de gestión financiera del psicólogo.
 
 
 ## 📝 Notas importantes (Reglas)
