@@ -54,6 +54,18 @@ export default function Sidebar() {
               <span className="sidebar-icon">📋</span>
               Historia clínica
             </NavLink>
+            <NavLink to="/facturacion" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">💳</span>
+              Facturación y Pagos
+            </NavLink>
+            <NavLink to="/reportes-financieros" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">📊</span>
+              Reportes
+            </NavLink>
           </>
         )}
 

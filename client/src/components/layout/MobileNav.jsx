@@ -58,9 +58,17 @@ export default function MobileNav() {
           </NavLink>
 
           {hasRole(['ADMIN', 'PSYCHOLOGIST']) && (
-            <NavLink to="/historia-clinica" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
-              📋 Historia clínica
-            </NavLink>
+            <>
+              <NavLink to="/historia-clinica" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                📋 Historia clínica
+              </NavLink>
+              <NavLink to="/facturacion" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                💳 Facturación y Pagos
+              </NavLink>
+              <NavLink to="/reportes-financieros" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                📊 Reportes
+              </NavLink>
+            </>
           )}
 
           {hasRole(['ADMIN']) && (

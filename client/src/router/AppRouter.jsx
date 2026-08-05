@@ -34,6 +34,11 @@ import BookingPublicPage from '../features/agenda/BookingPublicPage';
 import PatientsListPage from '../features/clinical/PatientsListPage';
 import ClinicalRecordPage from '../features/clinical/ClinicalRecordPage';
 
+// Feature 005 — Facturación y Pagos
+import StaffInvoiceListPage from '../features/billing/InvoiceListPage';
+import StaffInvoiceDetailPage from '../features/billing/InvoiceDetailPage';
+import FinancialReportPage from '../features/billing/FinancialReportPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -85,6 +90,13 @@ export default function AppRouter() {
               <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
                 <Route path="historia-clinica" element={<PatientsListPage />} />
                 <Route path="historia-clinica/:patientId" element={<ClinicalRecordPage />} />
+              </Route>
+
+              {/* Facturación y Pagos */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
+                <Route path="facturacion" element={<StaffInvoiceListPage />} />
+                <Route path="facturacion/:id" element={<StaffInvoiceDetailPage />} />
+                <Route path="reportes-financieros" element={<FinancialReportPage />} />
               </Route>
 
               {/* Auditoría (Solo Admin) */}

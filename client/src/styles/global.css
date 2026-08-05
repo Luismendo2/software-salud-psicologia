@@ -10,6 +10,7 @@
 @import './portal.css';
 @import './clinical.css';
 @import './auth.css';
+@import './billing.css';
 
 /* ── Reset y base ── */
 *,

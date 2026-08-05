@@ -35,12 +35,13 @@ Hemos construido toda la arquitectura visual e interactiva del módulo de citas 
 - [x] Desarrollo de **002-portal-paciente** (Dashboard, formularios, firma digital, pagos).
 - [x] Desarrollo del front-end de **003-historia-clinica** (Notas enriquecidas, Archivos, Genograma).
 - [x] Desarrollo del front-end de **004-seguridad-privacidad** (Login, Roles, Configuración de Cuenta, Auditoría).
+- [x] Desarrollo del front-end de **005-facturacion-pagos** (Listado, Modal de creación, Detalle de factura, Reportes Financieros, Mocks y Servicios).
 
 ## Siguiente paso recomendado
 De acuerdo a tu directriz de **terminar primero todo el front-end antes de iniciar con bases de datos y backend**, el siguiente paso es:
 
-1. Iniciar el desarrollo del front-end de **005-facturacion-pagos** (Facturas, ingresos, reportes financieros).
-2. Revisar la especificación (spec.md) y plan (plan.md) de dicha feature para crear los componentes de gestión financiera del psicólogo.
+1. Iniciar el desarrollo del front-end de **006-telepsicologia** (Videollamadas, chat en vivo, sala de espera virtual).
+2. Revisar la especificación y plan de dicha feature para crear los componentes de la experiencia de telemedicina.
 
 
 ## 📝 Notas importantes (Reglas)
