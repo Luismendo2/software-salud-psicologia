@@ -39,6 +39,11 @@ import StaffInvoiceListPage from '../features/billing/InvoiceListPage';
 import StaffInvoiceDetailPage from '../features/billing/InvoiceDetailPage';
 import FinancialReportPage from '../features/billing/FinancialReportPage';
 
+// Feature 006 — Telepsicología
+import SessionsListPage from '../features/telepsychology/SessionsListPage';
+import WaitingRoomPage from '../features/telepsychology/WaitingRoomPage';
+import VideoSessionPage from '../features/telepsychology/VideoSessionPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -73,6 +78,10 @@ export default function AppRouter() {
               <Route path="pagos/:invoiceId" element={<PaymentPage />} />
               <Route path="configuracion" element={<AccountSettingsPage />} />
             </Route>
+            
+            {/* Videollamada (Paciente) - Se muestra sin el layout del portal para usar toda la pantalla */}
+            <Route path="/session/:appointmentId/waiting-room" element={<WaitingRoomPage />} />
+            <Route path="/session/:appointmentId/call" element={<VideoSessionPage />} />
           </Route>
 
           {/* ── App del Staff (Protegida) ── */}
@@ -99,6 +108,11 @@ export default function AppRouter() {
                 <Route path="reportes-financieros" element={<FinancialReportPage />} />
               </Route>
 
+              {/* Telepsicología */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
+                <Route path="telepsicologia" element={<SessionsListPage />} />
+              </Route>
+
               {/* Auditoría (Solo Admin) */}
               <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
                 <Route path="auditoria" element={<AuditLogPage />} />
@@ -107,6 +121,9 @@ export default function AppRouter() {
               {/* Configuración */}
               <Route path="configuracion" element={<AccountSettingsPage />} />
             </Route>
+
+            {/* Videollamada (Psicólogo) - Sin AppLayout */}
+            <Route path="/session/:appointmentId/host" element={<VideoSessionPage />} />
           </Route>
           
           {/* Fallback */}

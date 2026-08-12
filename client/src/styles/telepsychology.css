@@ -1,0 +1,885 @@
+/* ==========================================================================
+   telepsychology.css — Estilos para Telepsicología (Feature 006)
+   
+   Incluye: videollamada, sala de espera, verificación de dispositivos,
+   consentimiento, listado de sesiones, chat y controles.
+   ========================================================================== */
+
+/* ── Listado de Sesiones ── */
+.tele-sessions-page {
+  padding: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tele-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-lg);
+}
+
+.tele-header h1 {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin: 0 0 0.25rem 0;
+}
+
+.tele-header p {
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+.tele-filters {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+}
+
+.tele-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tele-filter-group label {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.tele-table-wrapper {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  overflow-x: auto;
+}
+
+.tele-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tele-table thead {
+  background: var(--color-gray-50);
+}
+
+.tele-table th {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-gray-200);
+  white-space: nowrap;
+}
+
+.tele-table td {
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+  border-bottom: 1px solid var(--color-gray-100);
+  white-space: nowrap;
+}
+
+.tele-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.tele-table tbody tr:hover {
+  background: var(--color-primary-50);
+}
+
+.tele-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status badges */
+.tele-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.tele-status--waiting {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.tele-status--active {
+  background: #f0fdf4;
+  color: #22c55e;
+}
+
+.tele-status--ended {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.tele-status--error {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+/* ── Sala de Espera ── */
+.waiting-room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-accent-50) 100%);
+  padding: var(--space-lg);
+}
+
+.waiting-room-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2xl);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.waiting-room-logo {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.waiting-room-card h1 {
+  font-size: 1.5rem;
+  color: var(--color-gray-900);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.waiting-room-card .subtitle {
+  color: var(--color-gray-500);
+  margin: 0 0 var(--space-lg) 0;
+}
+
+.waiting-room-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--color-gray-50);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  text-align: left;
+}
+
+.waiting-room-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.waiting-room-info-row .label {
+  color: var(--color-gray-500);
+}
+
+.waiting-room-info-row .value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-800);
+}
+
+/* Pulse animation for waiting state */
+.waiting-pulse {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-warning);
+  animation: pulse 2s ease-in-out infinite;
+  margin-right: var(--space-sm);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.waiting-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--color-gray-600);
+  padding: var(--space-md);
+  background: #fffbeb;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Device Check ── */
+.device-check-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: var(--space-md);
+}
+
+.device-check-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xl);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.device-check-card h2 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 1.25rem;
+  color: var(--color-gray-900);
+}
+
+.device-check-card .description {
+  color: var(--color-gray-500);
+  margin: 0 0 var(--space-lg) 0;
+  font-size: 0.875rem;
+}
+
+.device-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-gray-900);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.device-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror effect */
+}
+
+.device-preview .no-camera {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.device-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.device-status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.device-status-item.ok {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.device-status-item.error {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.device-status-item.checking {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+/* Mic level indicator */
+.mic-level-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+}
+
+.mic-level-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--color-gray-200);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.mic-level-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-success), var(--color-accent-500));
+  border-radius: var(--radius-pill);
+  transition: width 100ms ease;
+}
+
+.mic-level-label {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  min-width: 24px;
+}
+
+.device-error-help {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.device-error-help h4 {
+  color: #dc2626;
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 0.875rem;
+}
+
+.device-error-help ul {
+  margin: 0;
+  padding-left: var(--space-md);
+  color: var(--color-gray-700);
+  font-size: 0.8125rem;
+}
+
+.device-error-help li {
+  margin-bottom: 0.25rem;
+}
+
+/* ── Consentimiento ── */
+.consent-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: var(--space-md);
+}
+
+.consent-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 650px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.consent-header {
+  padding: var(--space-lg) var(--space-lg) 0;
+}
+
+.consent-header h2 {
+  font-size: 1.25rem;
+  color: var(--color-gray-900);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.consent-header .version {
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+}
+
+.consent-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.consent-section {
+  margin-bottom: var(--space-md);
+}
+
+.consent-section h3 {
+  font-size: 0.9375rem;
+  color: var(--color-gray-800);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.consent-section p {
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.consent-footer {
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.consent-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  cursor: pointer;
+}
+
+.consent-checkbox input[type="checkbox"] {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary-600);
+}
+
+.consent-checkbox span {
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+}
+
+.consent-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+/* ── Videollamada ── */
+.video-session-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--color-gray-900);
+  overflow: hidden;
+}
+
+.video-session-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  z-index: 10;
+}
+
+.video-session-topbar .session-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.video-session-topbar .session-info h3 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-semibold);
+  color: white;
+}
+
+.video-session-topbar .session-timer {
+  font-family: 'Inter', monospace;
+  font-size: 0.875rem;
+  color: var(--color-accent-400);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+.video-session-topbar .recording-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-danger);
+}
+
+.video-session-topbar .recording-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.video-grid-container {
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+
+.video-grid {
+  flex: 1;
+  display: grid;
+  gap: 4px;
+  padding: 4px;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.video-grid.single-view {
+  grid-template-columns: 1fr;
+}
+
+.video-tile {
+  position: relative;
+  background: var(--color-gray-800);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.video-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-tile.local video {
+  transform: scaleX(-1);
+}
+
+.video-tile .participant-label {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: var(--space-sm);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.video-tile .camera-off-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-gray-400);
+}
+
+.video-tile .camera-off-placeholder .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: white;
+}
+
+/* Video controls bar */
+.video-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+}
+
+.video-control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.video-control-btn:hover {
+  transform: scale(1.1);
+}
+
+.video-control-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.video-control-btn.muted {
+  background: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.video-control-btn.end-call {
+  background: var(--color-danger);
+  color: white;
+  width: 56px;
+  height: 56px;
+  font-size: 1.5rem;
+}
+
+.video-control-btn.end-call:hover {
+  background: #dc2626;
+}
+
+.video-control-btn.start-call {
+  background: var(--color-success);
+  color: white;
+  width: 56px;
+  height: 56px;
+  font-size: 1.5rem;
+}
+
+.video-control-btn.start-call:hover {
+  background: #16a34a;
+}
+
+.video-control-btn.chat-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.video-control-btn.chat-toggle.has-unread {
+  background: var(--color-primary-600);
+}
+
+/* ── Chat Panel ── */
+.chat-panel {
+  width: 320px;
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--color-gray-200);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.chat-header h4 {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-gray-800);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.chat-message {
+  max-width: 85%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+}
+
+.chat-message.sent {
+  align-self: flex-end;
+  background: var(--color-primary-500);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message.received {
+  align-self: flex-start;
+  background: var(--color-gray-100);
+  color: var(--color-gray-800);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-message .sender {
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+
+.chat-message .time {
+  font-size: 0.625rem;
+  opacity: 0.6;
+  margin-top: 2px;
+  text-align: right;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  outline: none;
+}
+
+.chat-input-area input:focus {
+  border-color: var(--color-primary-500);
+}
+
+.chat-input-area button {
+  background: var(--color-primary-500);
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.chat-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: var(--color-gray-400);
+  font-size: 0.8125rem;
+  text-align: center;
+  padding: var(--space-md);
+}
+
+/* ── Session ended screen ── */
+.session-ended {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-accent-50) 100%);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.session-ended-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2xl);
+  max-width: 450px;
+  width: 100%;
+}
+
+.session-ended-card .icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.session-ended-card h2 {
+  color: var(--color-gray-900);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.session-ended-card p {
+  color: var(--color-gray-500);
+  margin: 0 0 var(--space-lg) 0;
+}
+
+.session-summary {
+  background: var(--color-gray-50);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  text-align: left;
+}
+
+.session-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding: 0.25rem 0;
+}
+
+.session-summary-row .label {
+  color: var(--color-gray-500);
+}
+
+.session-summary-row .value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-800);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .tele-header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .tele-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-md);
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 20;
+  }
+
+  .video-controls {
+    gap: var(--space-sm);
+  }
+
+  .video-control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .video-control-btn.end-call,
+  .video-control-btn.start-call {
+    width: 48px;
+    height: 48px;
+  }
+}

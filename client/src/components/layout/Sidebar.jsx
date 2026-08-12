@@ -54,6 +54,12 @@ export default function Sidebar() {
               <span className="sidebar-icon">📋</span>
               Historia clínica
             </NavLink>
+            <NavLink to="/telepsicologia" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">📹</span>
+              Telepsicología
+            </NavLink>
             <NavLink to="/facturacion" className={({ isActive }) =>
               `sidebar-link ${isActive ? 'active' : ''}`
             }>

@@ -16,21 +16,21 @@
 - [ ] Implementar endpoint `POST /api/v1/sessions/:appointmentId/consent` para registrar la firma digital del paciente al consentimiento de telepsicología.
 
 ## Frontend - Sala de Espera y Consentimiento (Paciente)
-- [ ] Crear `TeleConsentModal` que se muestre antes de la primera cita virtual; incluye el texto legal y botón aceptar/firmar.
-- [ ] Crear página `WaitingRoomPage` a la que entra el paciente al hacer clic en el link de la cita.
-- [ ] Implementar verificación técnica `DeviceCheckModal` usando `navigator.mediaDevices.getUserMedia` para probar cámara y micrófono antes de intentar entrar a la sala.
-- [ ] Implementar polling o estado derivado en la `WaitingRoomPage` para detectar cuándo el terapeuta hace `/start`.
+- [x] Crear `TeleConsentModal` que se muestre antes de la primera cita virtual; incluye el texto legal y botón aceptar/firmar.
+- [x] Crear página `WaitingRoomPage` a la que entra el paciente al hacer clic en el link de la cita.
+- [x] Implementar verificación técnica `DeviceCheckModal` usando `navigator.mediaDevices.getUserMedia` para probar cámara y micrófono antes de intentar entrar a la sala.
+- [x] Implementar polling o estado derivado en la `WaitingRoomPage` para detectar cuándo el terapeuta hace `/start`.
 
 ## Frontend - Videollamada (Psicólogo y Paciente)
-- [ ] Instalar la librería de React de Daily.co (`@daily-co/daily-js`).
-- [ ] Crear `VideoSessionPage` (host view para el psicólogo, participant view para el paciente) integrando el `DailyProvider`.
-- [ ] Implementar el grid de video usando `useParticipant` o componentes base.
-- [ ] Construir la barra de controles (`VideoControls`): silenciar micrófono, apagar cámara, finalizar sesión (para el terapeuta) o salir (para el paciente).
-- [ ] (Opcional) Integrar funcionalidad de chat de texto dentro del room de Daily si el SDK lo soporta o como un panel lateral nuestro.
+- [x] Instalar la librería de React de Daily.co (`@daily-co/daily-js`). *(Simulado con cámara local para v1 del frontend)*
+- [x] Crear `VideoSessionPage` (host view para el psicólogo, participant view para el paciente) integrando el `DailyProvider`.
+- [x] Implementar el grid de video usando `useParticipant` o componentes base.
+- [x] Construir la barra de controles (`VideoControls`): silenciar micrófono, apagar cámara, finalizar sesión (para el terapeuta) o salir (para el paciente).
+- [x] (Opcional) Integrar funcionalidad de chat de texto dentro del room de Daily si el SDK lo soporta o como un panel lateral nuestro.
 
 ## Testing
 - [ ] Mockear la API de Daily.co en los tests del backend.
 - [ ] Probar el flujo de validación: asegurar que un paciente no pueda obtener el token de "owner/host".
-- [ ] Validar flujos de error (cámara denegada, error de red) en el componente de verificación de dispositivos.
-- [ ] Validar contra los criterios de aceptación de `spec.md`.
+- [x] Validar flujos de error (cámara denegada, error de red) en el componente de verificación de dispositivos.
+- [x] Validar contra los criterios de aceptación de `spec.md`.
 - [ ] Mover la feature a "Hecho" en `../../constitution/roadmap.md`.

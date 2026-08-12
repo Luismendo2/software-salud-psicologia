@@ -21,7 +21,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/agenda';
+  const from = location.state?.from?.pathname;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,8 +38,15 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      await login(email, password);
-      navigate(from, { replace: true });
+      const result = await login(email, password);
+      
+      let redirectPath = '/agenda';
+      if (result.user.role === 'PATIENT') {
+        redirectPath = '/portal';
+      }
+
+      const finalPath = from || redirectPath;
+      navigate(finalPath, { replace: true });
     } catch (err) {
       setError(err.message || 'Error al iniciar sesión.');
     } finally {

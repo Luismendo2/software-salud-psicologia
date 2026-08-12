@@ -109,6 +109,7 @@
   padding: var(--space-sm) var(--space-md);
   border-bottom: 1px solid var(--color-gray-50);
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .billing-table tbody tr {
@@ -781,16 +782,6 @@
    ══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
-  .billing-table th:nth-child(4),
-  .billing-table td:nth-child(4) {
-    display: none; /* Ocultar concepto en móvil */
-  }
-
-  .billing-table th:nth-child(6),
-  .billing-table td:nth-child(6) {
-    display: none; /* Ocultar fecha en móvil */
-  }
-
   .invoice-detail-actions {
     width: 100%;
   }

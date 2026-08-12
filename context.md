@@ -36,12 +36,13 @@ Hemos construido toda la arquitectura visual e interactiva del módulo de citas 
 - [x] Desarrollo del front-end de **003-historia-clinica** (Notas enriquecidas, Archivos, Genograma).
 - [x] Desarrollo del front-end de **004-seguridad-privacidad** (Login, Roles, Configuración de Cuenta, Auditoría).
 - [x] Desarrollo del front-end de **005-facturacion-pagos** (Listado, Modal de creación, Detalle de factura, Reportes Financieros, Mocks y Servicios).
+- [x] Desarrollo del front-end de **006-telepsicologia** (Videollamadas, chat en vivo, sala de espera virtual).
 
 ## Siguiente paso recomendado
 De acuerdo a tu directriz de **terminar primero todo el front-end antes de iniciar con bases de datos y backend**, el siguiente paso es:
 
-1. Iniciar el desarrollo del front-end de **006-telepsicologia** (Videollamadas, chat en vivo, sala de espera virtual).
-2. Revisar la especificación y plan de dicha feature para crear los componentes de la experiencia de telemedicina.
+1. Iniciar el desarrollo del front-end de **007-evaluaciones** (Cuestionarios clínicos, escalas psicométricas, reportería automática).
+2. Revisar la especificación y plan de dicha feature para crear los componentes de evaluación del paciente.
 
 
 ## 📝 Notas importantes (Reglas)

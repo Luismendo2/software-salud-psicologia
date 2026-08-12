@@ -11,6 +11,7 @@
 @import './clinical.css';
 @import './auth.css';
 @import './billing.css';
+@import './telepsychology.css';
 
 /* ── Reset y base ── */
 *,
@@ -121,6 +122,10 @@ h3 { font-size: 1.25rem; }
   font-size: 0.875rem;
   padding: 0.5rem 0.75rem;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-select {
+  padding-right: 2.25rem; /* Asegura espacio para la flecha del dropdown */
 }
 
 .form-control:focus,

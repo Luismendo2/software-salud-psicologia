@@ -137,7 +137,7 @@ const InvoiceListPage = () => {
         </div>
       </div>
 
-      <div className="billing-table-container">
+      <div className="billing-table-wrapper">
         {loading ? (
           <div className="billing-loading">Cargando facturas...</div>
         ) : invoices.length === 0 ? (
