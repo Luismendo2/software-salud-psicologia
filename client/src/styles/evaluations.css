@@ -1,0 +1,174 @@
+/* ==========================================================================
+   evaluations.css — Estilos para Evaluaciones y MBC (Feature 007)
+   ========================================================================== */
+
+/* ── Panel de Historial (Psicólogo) ── */
+.assessments-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.assessments-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Gráfica de progreso ── */
+.progress-chart-container {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.progress-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.progress-chart-wrapper {
+  width: 100%;
+  height: 400px;
+}
+
+/* ── Tarjeta de Resultado ── */
+.assessment-result-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-left: 4px solid var(--color-primary-500);
+}
+
+.assessment-result-card.risk-alert {
+  border-left-color: var(--color-danger);
+  background-color: #fef2f2; /* red-50 */
+}
+
+.assessment-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-gray-200);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.assessment-result-title {
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.125rem;
+}
+
+.assessment-result-date {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+}
+
+.assessment-score-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.assessment-score-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: white;
+}
+
+.assessment-severity {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Colores de severidad genéricos */
+.severity-min { background-color: var(--color-success); }
+.severity-mild { background-color: #f59e0b; /* amber-500 */ }
+.severity-mod { background-color: #f97316; /* orange-500 */ }
+.severity-severe { background-color: var(--color-danger); }
+
+/* Alertas */
+.assessment-alert {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Formulario de Evaluación (Paciente) ── */
+.assessment-form-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.assessment-question-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.assessment-question-text {
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-md);
+}
+
+.assessment-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.assessment-option-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.assessment-option-label:hover {
+  background-color: var(--color-gray-50);
+}
+
+.assessment-option-label input[type="radio"]:checked + .option-text {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+}
+
+.assessment-option-label:has(input[type="radio"]:checked) {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-50);
+}
+
+.assessment-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-gray-200);
+  margin-top: var(--space-xl);
+}

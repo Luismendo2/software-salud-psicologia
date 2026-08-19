@@ -44,6 +44,11 @@ import SessionsListPage from '../features/telepsychology/SessionsListPage';
 import WaitingRoomPage from '../features/telepsychology/WaitingRoomPage';
 import VideoSessionPage from '../features/telepsychology/VideoSessionPage';
 
+// Feature 007 — Evaluaciones y MBC
+import ProgressChartPage from '../features/clinical/ProgressChartPage';
+import MyAssessmentsPage from '../features/portal/MyAssessmentsPage';
+import AssessmentFormPage from '../features/portal/AssessmentFormPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -74,6 +79,8 @@ export default function AppRouter() {
               <Route path="documentos" element={<DocumentsPage />} />
               <Route path="documentos/ingreso" element={<IntakeFormPage />} />
               <Route path="documentos/consentimiento/:type" element={<ConsentSignPage />} />
+              <Route path="evaluaciones" element={<MyAssessmentsPage />} />
+              <Route path="evaluaciones/:id/responder" element={<AssessmentFormPage />} />
               <Route path="pagos" element={<InvoiceListPage />} />
               <Route path="pagos/:invoiceId" element={<PaymentPage />} />
               <Route path="configuracion" element={<AccountSettingsPage />} />
@@ -99,6 +106,7 @@ export default function AppRouter() {
               <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
                 <Route path="historia-clinica" element={<PatientsListPage />} />
                 <Route path="historia-clinica/:patientId" element={<ClinicalRecordPage />} />
+                <Route path="historia-clinica/:patientId/progreso" element={<ProgressChartPage />} />
               </Route>
 
               {/* Facturación y Pagos */}

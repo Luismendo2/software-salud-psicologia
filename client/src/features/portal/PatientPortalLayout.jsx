@@ -68,6 +68,14 @@ export default function PatientPortalLayout() {
         </NavLink>
 
         <NavLink
+          to="/portal/evaluaciones"
+          className={({ isActive }) => `portal-tab ${isActive ? 'active' : ''}`}
+        >
+          <span className="portal-tab-icon">📊</span>
+          <span className="portal-tab-label">Evaluaciones</span>
+        </NavLink>
+
+        <NavLink
           to="/portal/pagos"
           className={({ isActive }) => `portal-tab ${isActive ? 'active' : ''}`}
         >

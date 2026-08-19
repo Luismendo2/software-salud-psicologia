@@ -37,12 +37,13 @@ Hemos construido toda la arquitectura visual e interactiva del módulo de citas 
 - [x] Desarrollo del front-end de **004-seguridad-privacidad** (Login, Roles, Configuración de Cuenta, Auditoría).
 - [x] Desarrollo del front-end de **005-facturacion-pagos** (Listado, Modal de creación, Detalle de factura, Reportes Financieros, Mocks y Servicios).
 - [x] Desarrollo del front-end de **006-telepsicologia** (Videollamadas, chat en vivo, sala de espera virtual).
+- [ ] Desarrollo del front-end de **007-evaluaciones-mbc** (Cuestionarios, gráficas de progreso, panel de paciente y psicólogo).
 
 ## Siguiente paso recomendado
-De acuerdo a tu directriz de **terminar primero todo el front-end antes de iniciar con bases de datos y backend**, el siguiente paso es:
+De acuerdo a tu directriz de **terminar primero todo el front-end antes de iniciar con bases de datos y backend**, el siguiente paso (luego de 007) es:
 
-1. Iniciar el desarrollo del front-end de **007-evaluaciones** (Cuestionarios clínicos, escalas psicométricas, reportería automática).
-2. Revisar la especificación y plan de dicha feature para crear los componentes de evaluación del paciente.
+1. Iniciar el desarrollo del front-end de **008-comunicacion-seguimiento** (Chat asíncrono, recordatorios, notificaciones).
+2. Revisar la especificación y plan de dicha feature para crear los componentes de comunicación.
 
 
 ## 📝 Notas importantes (Reglas)

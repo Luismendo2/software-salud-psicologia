@@ -18,16 +18,16 @@
 - [ ] Llamar a la cola desde el servicio backend cuando el flag se active.
 
 ## Frontend - Psicólogo
-- [ ] Crear componente `ProgressChartPage` instalando `Recharts` y configurando un gráfico de líneas limpio, responsive.
-- [ ] Crear `SendAssessmentModal` para seleccionar paciente y tipo de evaluación a pedir.
-- [ ] Crear `AssessmentsPanel` en la vista de la historia clínica.
-- [ ] Crear `AssessmentResultCard` destacando visualmente si hay una alerta roja.
+- [x] Crear componente `ProgressChartPage` instalando `Recharts` y configurando un gráfico de líneas limpio, responsive.
+- [x] Crear `SendAssessmentModal` para seleccionar paciente y tipo de evaluación a pedir.
+- [x] Crear `AssessmentsPanel` en la vista de la historia clínica.
+- [x] Crear `AssessmentResultCard` destacando visualmente si hay una alerta roja.
 
 ## Frontend - Portal Paciente
-- [ ] Añadir una sección de "Mis Evaluaciones" en el portal (`MyAssessmentsPage`).
-- [ ] Construir `AssessmentFormPage` que itere sobre el JSON de preguntas y construya radio buttons dinámicos.
-- [ ] Controlar estado del form y bloquear el envío si faltan respuestas.
-- [ ] Mostrar pantalla de confirmación "Tus respuestas han sido enviadas al terapeuta" post-envío.
+- [x] Añadir una sección de "Mis Evaluaciones" en el portal (`MyAssessmentsPage`).
+- [x] Construir `AssessmentFormPage` que itere sobre el JSON de preguntas y construya radio buttons dinámicos.
+- [x] Controlar estado del form y bloquear el envío si faltan respuestas.
+- [x] Mostrar pantalla de confirmación "Tus respuestas han sido enviadas al terapeuta" post-envío.
 
 ## Testing
 - [ ] Tests unitarios estrictos para el motor de cálculo de scores (pasar un mock de respuestas JSON y asegurar que el puntaje final y severidad son exactos).

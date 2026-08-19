@@ -16,11 +16,13 @@ import { getClinicalRecord, getSessionNotes } from '../../services/clinicalServi
 import SessionNotesTab from './SessionNotesTab';
 import AttachmentsTab from './AttachmentsTab';
 import GenogramTab from './GenogramTab';
+import AssessmentsPanel from './AssessmentsPanel';
 
 const TABS = [
   { key: 'notes',       label: 'Notas de sesión', icon: '📝' },
   { key: 'attachments', label: 'Archivos',        icon: '📎' },
   { key: 'genogram',    label: 'Genograma',        icon: '🌳' },
+  { key: 'assessments', label: 'Evaluaciones',     icon: '📊' },
 ];
 
 export default function ClinicalRecordPage() {
@@ -146,6 +148,9 @@ export default function ClinicalRecordPage() {
         )}
         {activeTab === 'genogram' && (
           <GenogramTab patientId={patientId} />
+        )}
+        {activeTab === 'assessments' && (
+          <AssessmentsPanel patientId={patientId} />
         )}
       </div>
     </div>
