@@ -24,16 +24,16 @@
 - [ ] Programar notificaciones (Nodemailer/Twilio) específicas de refuerzo para esos casos.
 
 ## Frontend - Psicólogo
-- [ ] Crear `MessagingPage` con listado de conversaciones y ventana de chat.
-- [ ] Instalar SWR o react-query y configurar el *polling* cada 10-15s para el hilo de mensajes.
-- [ ] Construir `TaskManagerPage` con vista de tarjetas (pendientes, entregadas, atrasadas).
-- [ ] Crear `SatisfactionDashboard` con cálculo del score NPS (Promotores % - Detractores %).
+- [x] Crear `MessagingPage` con listado de conversaciones y ventana de chat.
+- [x] Instalar SWR o react-query y configurar el *polling* cada 10-15s para el hilo de mensajes. (Hecho nativamente con useEffect).
+- [x] Construir `TaskManagerPage` con vista de tarjetas (pendientes, entregadas, atrasadas).
+- [x] Crear `SatisfactionDashboard` con cálculo del score NPS (Promotores % - Detractores %).
 
 ## Frontend - Portal Paciente
-- [ ] Crear la vista `MessageInboxPage` para el portal.
-- [ ] Añadir banner de "No usar en caso de emergencia" encima del chat.
-- [ ] Crear la vista `TaskListPage` (lista de tareas pendientes y su detalle).
-- [ ] Construir y testear el `PostSessionSurveyModal` (estrellas/escala y caja de texto).
+- [x] Crear la vista `MessageInboxPage` para el portal.
+- [x] Añadir banner de "No usar en caso de emergencia" encima del chat.
+- [x] Crear la vista `TaskListPage` (lista de tareas pendientes y su detalle).
+- [x] Construir y testear el `PostSessionSurveyModal` (estrellas/escala y caja de texto).
 
 ## Testing
 - [ ] Testear la creación de mensajes y asegurarse que un usuario no pueda escribir en conversaciones ajenas.

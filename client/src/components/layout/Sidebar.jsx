@@ -75,6 +75,30 @@ export default function Sidebar() {
           </>
         )}
 
+        {hasRole(['ADMIN', 'PSYCHOLOGIST']) && (
+          <>
+            <div className="sidebar-section-title">Comunicación</div>
+            <NavLink to="/mensajeria" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">💬</span>
+              Mensajes
+            </NavLink>
+            <NavLink to="/tareas" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">📝</span>
+              Tareas Terapéuticas
+            </NavLink>
+            <NavLink to="/satisfaccion" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">⭐</span>
+              Satisfacción (NPS)
+            </NavLink>
+          </>
+        )}
+
         <div className="sidebar-section-title">Administración</div>
         
         {hasRole(['ADMIN']) && (

@@ -49,6 +49,13 @@ import ProgressChartPage from '../features/clinical/ProgressChartPage';
 import MyAssessmentsPage from '../features/portal/MyAssessmentsPage';
 import AssessmentFormPage from '../features/portal/AssessmentFormPage';
 
+// Feature 008 — Comunicación y Seguimiento
+import MessagingPage from '../features/communication/MessagingPage';
+import TaskManagerPage from '../features/communication/TaskManagerPage';
+import SatisfactionDashboard from '../features/communication/SatisfactionDashboard';
+import MessageInboxPage from '../features/portal/MessageInboxPage';
+import TaskListPage from '../features/portal/TaskListPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -81,6 +88,8 @@ export default function AppRouter() {
               <Route path="documentos/consentimiento/:type" element={<ConsentSignPage />} />
               <Route path="evaluaciones" element={<MyAssessmentsPage />} />
               <Route path="evaluaciones/:id/responder" element={<AssessmentFormPage />} />
+              <Route path="mensajes" element={<MessageInboxPage />} />
+              <Route path="tareas" element={<TaskListPage />} />
               <Route path="pagos" element={<InvoiceListPage />} />
               <Route path="pagos/:invoiceId" element={<PaymentPage />} />
               <Route path="configuracion" element={<AccountSettingsPage />} />
@@ -119,6 +128,13 @@ export default function AppRouter() {
               {/* Telepsicología */}
               <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
                 <Route path="telepsicologia" element={<SessionsListPage />} />
+              </Route>
+
+              {/* Comunicación y Seguimiento */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
+                <Route path="mensajeria" element={<MessagingPage />} />
+                <Route path="tareas" element={<TaskManagerPage />} />
+                <Route path="satisfaccion" element={<SatisfactionDashboard />} />
               </Route>
 
               {/* Auditoría (Solo Admin) */}

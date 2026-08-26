@@ -1,0 +1,473 @@
+/* ==========================================================================
+   communication.css — Estilos para Comunicación y Seguimiento (Feature 008)
+   ========================================================================== */
+
+/* ── Messaging Layout ── */
+.messaging-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: calc(100vh - 120px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background-color: var(--color-surface);
+}
+
+@media (max-width: 768px) {
+  .messaging-layout {
+    grid-template-columns: 1fr;
+    height: calc(100vh - 180px); /* Mantener altura fija para que funcione el scroll interno */
+  }
+  .messaging-layout .chat-panel {
+    display: none;
+  }
+  .messaging-layout.chat-open .conversations-list {
+    display: none;
+  }
+  .messaging-layout.chat-open .chat-panel {
+    display: flex;
+  }
+}
+
+/* ── Conversations sidebar ── */
+.conversations-list {
+  border-right: 1px solid var(--color-gray-200);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversations-list-header {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-gray-100);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.125rem;
+}
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  border-bottom: 1px solid var(--color-gray-50);
+}
+
+.conversation-item:hover {
+  background-color: var(--color-gray-50);
+}
+
+.conversation-item.active {
+  background-color: var(--color-primary-50);
+  border-left: 3px solid var(--color-primary-500);
+}
+
+.conversation-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.conversation-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-name {
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+  color: var(--color-gray-800);
+}
+
+.conversation-preview {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.conversation-time {
+  font-size: 0.6875rem;
+  color: var(--color-gray-400);
+}
+
+.conversation-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-primary-500);
+  color: white;
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-bold);
+  margin-top: 4px;
+}
+
+/* ── Chat panel ── */
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0; /* Fix para overflow de flexbox */
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-gray-200);
+  background-color: var(--color-surface);
+}
+
+.chat-header-back {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: var(--color-gray-600);
+}
+
+@media (max-width: 768px) {
+  .chat-header-back {
+    display: block;
+  }
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0; /* Evita que el contenedor crezca más allá del padre */
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background-color: var(--color-gray-50);
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  position: relative;
+}
+
+.chat-bubble.sent {
+  align-self: flex-end;
+  background-color: var(--color-primary-500);
+  color: white;
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.chat-bubble.received {
+  align-self: flex-start;
+  background-color: var(--color-surface);
+  color: var(--color-gray-800);
+  border-bottom-left-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-bubble-time {
+  font-size: 0.625rem;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.chat-bubble.sent .chat-bubble-time {
+  text-align: right;
+  color: rgba(255,255,255,0.8);
+}
+
+.chat-bubble.received .chat-bubble-time {
+  color: var(--color-gray-400);
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--color-gray-200);
+  background-color: var(--color-surface);
+}
+
+.chat-input-bar input {
+  flex: 1;
+}
+
+/* Banner de emergencia */
+.chat-emergency-banner {
+  padding: var(--space-sm) var(--space-md);
+  background-color: #fef3c7;
+  color: #92400e;
+  font-size: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid #fcd34d;
+}
+
+/* ── Task Manager ── */
+.task-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.task-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.task-column {
+  background-color: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
+.task-column-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.task-column-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.task-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast);
+}
+
+.task-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.task-card-title {
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-xs);
+}
+
+.task-card-patient {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+}
+
+.task-card-due {
+  font-size: 0.6875rem;
+  margin-top: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-card-due.overdue {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── Satisfaction Dashboard ── */
+.nps-gauge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.nps-score {
+  font-size: 4rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.nps-label {
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  margin-top: var(--space-xs);
+}
+
+.nps-breakdown {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.nps-breakdown-item {
+  text-align: center;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.nps-breakdown-value {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.nps-breakdown-label {
+  font-size: 0.75rem;
+  color: var(--color-gray-600);
+  margin-top: 2px;
+}
+
+.survey-comment-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  border-left: 3px solid var(--color-gray-200);
+}
+
+.survey-comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.survey-comment-patient {
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
+}
+
+.survey-comment-score {
+  font-weight: var(--font-weight-bold);
+  font-size: 0.875rem;
+}
+
+.survey-comment-text {
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+  font-style: italic;
+}
+
+/* ── Patient Task List ── */
+.patient-task-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.patient-task-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+/* ── Post-session survey modal ── */
+.survey-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: var(--space-md);
+}
+
+.survey-modal {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-xl);
+}
+
+.nps-slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.nps-slider-value {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.nps-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.6875rem;
+  color: var(--color-gray-500);
+}
+
+input[type="range"].nps-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--color-danger), #f59e0b, var(--color-success));
+  outline: none;
+}
+
+input[type="range"].nps-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  border: 3px solid var(--color-primary-500);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}

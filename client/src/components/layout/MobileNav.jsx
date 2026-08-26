@@ -71,6 +71,15 @@ export default function MobileNav() {
               <NavLink to="/reportes-financieros" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
                 📊 Reportes
               </NavLink>
+              <NavLink to="/mensajeria" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left', marginTop: 'var(--space-md)' }}>
+                💬 Mensajes
+              </NavLink>
+              <NavLink to="/tareas" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                📝 Tareas Terapéuticas
+              </NavLink>
+              <NavLink to="/satisfaccion" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                ⭐ Satisfacción (NPS)
+              </NavLink>
             </>
           )}
 

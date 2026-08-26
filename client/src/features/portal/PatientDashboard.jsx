@@ -9,12 +9,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getPatientProfile, getUpcomingAppointments, getConsents } from '../../services/patientService';
+import * as commService from '../../services/communicationService';
 import StatusBadge from '../agenda/StatusBadge';
+import PostSessionSurveyModal from './PostSessionSurveyModal';
+import { useAuth } from '../auth/AuthContext';
 
 export default function PatientDashboard() {
+  const { user } = useAuth();
   const [profile, setProfile] = useState(null);
   const [nextAppointment, setNextAppointment] = useState(null);
   const [alerts, setAlerts] = useState([]);
+  const [pendingSurvey, setPendingSurvey] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,13 +28,15 @@ export default function PatientDashboard() {
 
   const loadDashboardData = async () => {
     try {
-      const [profileData, appointments, consents] = await Promise.all([
+      const [profileData, appointments, consents, survey] = await Promise.all([
         getPatientProfile(),
         getUpcomingAppointments(),
         getConsents(),
+        commService.getPendingSurvey(user.id),
       ]);
 
       setProfile(profileData);
+      setPendingSurvey(survey);
 
       // La próxima cita es la primera del array (ya ordenadas por fecha)
       if (appointments.length > 0) {
@@ -152,6 +159,13 @@ export default function PatientDashboard() {
         </div>
       )}
 
+      {pendingSurvey && (
+        <PostSessionSurveyModal 
+          survey={pendingSurvey} 
+          onClose={() => setPendingSurvey(null)} 
+          onSubmitted={() => setPendingSurvey(null)} 
+        />
+      )}
 
     </div>
   );
