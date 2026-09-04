@@ -15,6 +15,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { getClinicalTemplate, updateSessionNote, signSessionNote } from '../../services/clinicalService';
+import SubmitForSupervisionModal from '../supervision/SubmitForSupervisionModal';
 
 export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
   const [template, setTemplate] = useState(null);
@@ -22,6 +23,7 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
   const [saving, setSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState(null);
   const [showSignModal, setShowSignModal] = useState(false);
+  const [showSupervisionModal, setShowSupervisionModal] = useState(false);
   const [signing, setSigning] = useState(false);
   const saveTimerRef = useRef(null);
 
@@ -112,7 +114,15 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
         </div>
         <div className="clinical-editor-actions">
           {readOnly ? (
-            <span className="clinical-note-badge signed">✓ Firmada el {new Date(note.signedAt).toLocaleDateString('es-CO')}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
+              <button 
+                className="btn btn-outline-secondary btn-sm"
+                onClick={() => setShowSupervisionModal(true)}
+              >
+                🎓 Solicitar Supervisión
+              </button>
+              <span className="clinical-note-badge signed">✓ Firmada el {new Date(note.signedAt).toLocaleDateString('es-CO')}</span>
+            </div>
           ) : (
             <>
               {lastSaved && (
@@ -200,6 +210,16 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
           </div>
         </div>
       )}
+
+      {/* Modal de Supervisión */}
+      <SubmitForSupervisionModal 
+        isOpen={showSupervisionModal}
+        onClose={() => setShowSupervisionModal(false)}
+        noteId={note.id}
+        patientName={note.patientName || 'Paciente Actual'}
+        sessionDate={note.date}
+        sessionNumber={note.sessionNumber}
+      />
     </div>
   );
 }

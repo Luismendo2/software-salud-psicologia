@@ -83,6 +83,20 @@ export default function MobileNav() {
             </>
           )}
 
+          {hasRole(['ADMIN', 'PSYCHOLOGIST']) && (
+            <>
+              <NavLink to="/equipo/configuracion" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left', marginTop: 'var(--space-md)' }}>
+                🏢 Mi Clínica
+              </NavLink>
+              <NavLink to="/equipo" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }} end>
+                👥 Miembros
+              </NavLink>
+              <NavLink to="/equipo/supervision" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                🎓 Supervisión
+              </NavLink>
+            </>
+          )}
+
           {hasRole(['ADMIN']) && (
             <NavLink to="/auditoria" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
               🛡️ Auditoría

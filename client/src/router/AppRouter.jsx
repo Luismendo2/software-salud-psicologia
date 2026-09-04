@@ -56,6 +56,13 @@ import SatisfactionDashboard from '../features/communication/SatisfactionDashboa
 import MessageInboxPage from '../features/portal/MessageInboxPage';
 import TaskListPage from '../features/portal/TaskListPage';
 
+// Feature 009 — Equipo y Supervisión
+import OrganizationSettingsPage from '../features/organization/OrganizationSettingsPage';
+import MemberManagementPage from '../features/organization/MemberManagementPage';
+import InviteAcceptPage from '../features/organization/InviteAcceptPage';
+import SupervisionQueuePage from '../features/supervision/SupervisionQueuePage';
+import SupervisionCaseDetailPage from '../features/supervision/SupervisionCaseDetailPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -75,6 +82,7 @@ export default function AppRouter() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
           <Route path="/403" element={<ForbiddenPage />} />
+          <Route path="/invite/:orgId/:token" element={<InviteAcceptPage />} />
           
           <Route path="/book/:psychologistSlug" element={<BookingPublicPage />} />
 
@@ -135,6 +143,14 @@ export default function AppRouter() {
                 <Route path="mensajeria" element={<MessagingPage />} />
                 <Route path="tareas" element={<TaskManagerPage />} />
                 <Route path="satisfaccion" element={<SatisfactionDashboard />} />
+              </Route>
+
+              {/* Equipo y Supervisión (Feature 009) */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
+                <Route path="equipo" element={<MemberManagementPage />} />
+                <Route path="equipo/supervision" element={<SupervisionQueuePage />} />
+                <Route path="equipo/supervision/:id" element={<SupervisionCaseDetailPage />} />
+                <Route path="equipo/configuracion" element={<OrganizationSettingsPage />} />
               </Route>
 
               {/* Auditoría (Solo Admin) */}

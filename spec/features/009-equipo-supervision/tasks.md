@@ -21,16 +21,18 @@
 - [ ] Implementar `GET /api/v1/supervision-cases` (lista de revisión para el supervisor, incluye desanonimización selectiva según la BD).
 - [ ] Implementar `PUT /api/v1/supervision-cases/:id/feedback` para que el supervisor guarde comentarios y cierre el caso.
 
-## Frontend - Administración (OWNER)
-- [ ] Crear `OrganizationSettingsPage` (configuración general: nombre, logo, etc.).
-- [ ] Crear `MemberManagementPage` (tabla de equipo, modal para invitar).
-- [ ] Construir página pública de aceptación de invitación `InviteAcceptPage`.
+### Fase 2: Frontend (Organización y Roles)
+- [x] Crear componente `OrganizationSettingsPage` (Admin) para configurar datos de la clínica.
+- [x] Crear componente `MemberManagementPage` (Admin) con tabla de miembros y modales de invitación.
+- [x] Crear componente `InviteAcceptPage` (Público) para que nuevos usuarios acepten invitación por token.
+- [x] Crear componentes UI para cambio de rol (`ChangeMemberRoleModal`) y gestión de estado (Activar/Desactivar).
 
-## Frontend - Supervisión
-- [ ] Añadir botón "Solicitar Supervisión" en la vista `SessionNoteCard` del psicólogo.
-- [ ] Crear `SubmitForSupervisionModal` (seleccionar supervisor, activar/desactivar modo anonimizado).
-- [ ] Crear `SupervisionQueuePage` (dashboard del supervisor).
-- [ ] Crear `SupervisionCaseFeedbackPage` (vista dividida: nota original a la izquierda, caja de feedback a la derecha).
+### Fase 3: Frontend (Supervisión Clínica)
+- [x] Añadir botón "Solicitar Supervisión" en el visor de notas de sesión (`SessionNoteCard`).
+- [x] Crear `SubmitForSupervisionModal` (selección de supervisor, toggle de anonimización).
+- [x] Crear `SupervisionQueuePage` para el rol SUPERVISOR (cola de casos pendientes/resueltos).
+- [x] Crear `SupervisionCaseFeedbackPage` (vista dividida: nota a la izquierda, caja de feedback a la derecha).
+- [x] Crear insignia `AnonymizedPatientBadge` y lógica condicional en la UI para ocultar el nombre real si `isAnonymized` es true.
 
 ## Testing
 - [ ] (Crucial) Escribir tests de integración de seguridad: un miembro (MEMBER) no puede modificar settings, no puede invitar, ni ver pacientes de otro.
