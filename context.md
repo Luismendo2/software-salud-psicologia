@@ -40,14 +40,14 @@ Hemos construido toda la arquitectura visual e interactiva del módulo de citas 
 - [x] Desarrollo del front-end de **007-evaluaciones-mbc** (Cuestionarios, gráficas de progreso, panel de paciente y psicólogo).
 - [x] Desarrollo del front-end de **008-comunicacion-seguimiento** (Mensajería segura, tareas, encuestas NPS).
 - [x] Desarrollo del front-end de **009-equipo-supervision** (Gestión de equipo clínico, supervisión de casos).
-- [ ] Desarrollo del front-end de **010-reportes-estadisticas** (Métricas operativas y clínicas).
+- [x] Desarrollo del front-end de **010-reportes-estadisticas** (Métricas operativas y clínicas).
 - [ ] Desarrollo del front-end de **011-ia-clinica** (Asistente de IA para redacción y análisis).
 - [ ] Desarrollo del front-end de **012-valor-agregado** (Ej. Recursos psicoeducativos).
 
 ## Siguiente paso recomendado
 De acuerdo a tu directriz de **terminar primero todo el front-end antes de iniciar con bases de datos y backend**, el siguiente paso es continuar con la maquetación y desarrollo UI de los módulos faltantes:
 
-1. Iniciar el desarrollo del front-end de **010-reportes-estadisticas**.
+1. Iniciar el desarrollo del front-end de **011-ia-clinica**.
 
 
 ## 📝 Notas importantes (Reglas)

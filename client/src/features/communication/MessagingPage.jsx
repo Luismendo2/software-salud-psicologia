@@ -113,8 +113,8 @@ export default function MessagingPage() {
   }
 
   return (
-    <div>
-      <div className="page-header">
+    <div className={`messaging-page-wrap ${activeConvId ? 'is-chat-active' : ''}`}>
+      <div className="page-header messaging-header-title">
         <h1>💬 Mensajería</h1>
       </div>
 
@@ -128,13 +128,15 @@ export default function MessagingPage() {
             </div>
           ) : (
             conversations.map(conv => {
-              const convMessages = commService.getMessages ? null : [];
               const initials = conv.patientName.split(' ').map(w => w[0]).join('').slice(0, 2);
               return (
                 <div
                   key={conv.id}
                   className={`conversation-item ${activeConvId === conv.id ? 'active' : ''}`}
-                  onClick={() => setActiveConvId(conv.id)}
+                  onClick={() => {
+                    setActiveConvId(conv.id);
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                  }}
                 >
                   <div className="conversation-avatar">{initials}</div>
                   <div className="conversation-info">
@@ -163,12 +165,23 @@ export default function MessagingPage() {
           ) : (
             <>
               <div className="chat-header">
-                <button className="chat-header-back" onClick={() => setActiveConvId(null)}>←</button>
+                <button
+                  type="button"
+                  className="chat-header-back"
+                  onClick={() => {
+                    setActiveConvId(null);
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                  }}
+                  aria-label="Volver a la lista de conversaciones"
+                >
+                  <span className="chat-back-arrow">←</span>
+                  <span className="chat-back-label">Chats</span>
+                </button>
                 <div className="conversation-avatar">
                   {activeConv.patientName.split(' ').map(w => w[0]).join('').slice(0, 2)}
                 </div>
-                <div>
-                  <div style={{ fontWeight: 'var(--font-weight-semibold)', fontSize: '0.9375rem' }}>
+                <div className="chat-header-user-info">
+                  <div style={{ fontWeight: 'var(--font-weight-semibold)', fontSize: '0.9375rem', color: 'var(--color-gray-900)' }}>
                     {activeConv.patientName}
                   </div>
                   <div style={{ fontSize: '0.6875rem', color: 'var(--color-gray-500)' }}>

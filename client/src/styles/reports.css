@@ -1,0 +1,531 @@
+/* ==========================================================================
+   reports.css — Estilos para Reportes y Estadísticas (Feature 010)
+   ========================================================================== */
+
+.reports-page {
+  padding-bottom: var(--space-2xl);
+}
+
+/* ── Barra superior de controles y filtros ── */
+.reports-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  background: var(--color-surface);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-200);
+}
+
+.reports-filters-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.reports-filters-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  max-width: 100%;
+}
+
+.reports-presets-pills {
+  display: flex;
+  background: var(--color-gray-100);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+  max-width: 100%;
+}
+
+.reports-pill-btn {
+  border: none;
+  background: transparent;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-600);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.reports-pill-btn:hover {
+  color: var(--color-gray-900);
+}
+
+.reports-pill-btn.active {
+  background: var(--color-surface);
+  color: var(--color-primary-700);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.reports-custom-dates {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.reports-custom-dates input[type="date"] {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-gray-800);
+}
+
+/* ── Selector de psicólogo ── */
+.reports-psychologist-select {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.reports-psychologist-select select {
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-300);
+  font-size: 0.875rem;
+  background-color: var(--color-surface);
+  color: var(--color-gray-800);
+  outline: none;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.reports-header-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Botón de exportar con Dropdown ── */
+.reports-export-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.reports-export-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xs) 0;
+  min-width: 170px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.reports-export-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-gray-700);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.reports-export-item:hover {
+  background: var(--color-gray-50);
+  color: var(--color-primary-600);
+}
+
+/* ── Pestañas temáticas del dashboard ── */
+.reports-tabs-nav {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--color-gray-200);
+  padding-bottom: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.reports-tabs-nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.reports-tab-btn {
+  border: none;
+  background: transparent;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.reports-tab-btn:hover {
+  color: var(--color-gray-800);
+}
+
+.reports-tab-btn.active {
+  color: var(--color-primary-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+.reports-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-primary-600);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Reglas Responsive para móvil ── */
+@media (max-width: 640px) {
+  .reports-header-controls {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .reports-filters-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .reports-filters-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .reports-presets-pills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    border-radius: var(--radius-md);
+    padding: 3px;
+  }
+
+  .reports-pill-btn {
+    padding: 6px 2px;
+    font-size: 0.75rem;
+  }
+
+  .reports-custom-dates {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .reports-custom-dates input[type="date"] {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .reports-psychologist-select {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .reports-psychologist-select select {
+    width: 100%;
+  }
+
+  .reports-header-actions {
+    width: 100%;
+    display: flex;
+    justify-content: stretch;
+  }
+
+  .reports-export-dropdown {
+    width: 100%;
+  }
+
+  .reports-export-dropdown .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reports-export-menu {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .reports-presets-pills {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .reports-pill-btn {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ── Tarjetas de KPIs ── */
+.reports-kpis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.reports-kpi-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-200);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.reports-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.reports-kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.reports-kpi-body {
+  flex: 1;
+}
+
+.reports-kpi-title {
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  margin-bottom: 2px;
+}
+
+.reports-kpi-value {
+  font-size: 1.625rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  line-height: 1.2;
+}
+
+.reports-kpi-subtitle {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  margin-top: 4px;
+}
+
+/* ── Sección de Gráficos (Cards contenedoras) ── */
+.reports-chart-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-200);
+  margin-bottom: var(--space-xl);
+}
+
+.reports-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.reports-chart-title {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.reports-chart-subtitle {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  margin-top: 2px;
+}
+
+.reports-chart-container {
+  width: 100%;
+  height: 320px;
+}
+
+/* ── Tarjetas de Desempeño y Metas ── */
+.reports-performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.reports-perf-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-200);
+}
+
+.reports-goal-progress-wrap {
+  margin: var(--space-lg) 0;
+}
+
+.reports-progress-bar-track {
+  width: 100%;
+  height: 10px;
+  background: var(--color-gray-200);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.reports-progress-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-500));
+  transition: width 0.6s ease;
+}
+
+.reports-goal-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+  margin-top: var(--space-xs);
+}
+
+/* ── Desglose de fuentes de pacientes ── */
+.reports-sources-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .reports-sources-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reports-sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.reports-source-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-100);
+}
+
+.reports-source-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-800);
+}
+
+.reports-source-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.reports-source-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+}
+
+.reports-source-pct {
+  color: var(--color-gray-500);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-regular);
+}
+
+/* ── Estados vacíos y skeleton loaders ── */
+.reports-empty-state {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-gray-300);
+}
+
+.reports-empty-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+  opacity: 0.8;
+}
+
+.reports-skeleton-card {
+  height: 120px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: reportsShimmer 1.5s infinite;
+  border-radius: var(--radius-lg);
+}
+
+.reports-skeleton-chart {
+  height: 320px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: reportsShimmer 1.5s infinite;
+  border-radius: var(--radius-lg);
+}
+
+@keyframes reportsShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

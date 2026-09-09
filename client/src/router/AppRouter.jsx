@@ -63,6 +63,9 @@ import InviteAcceptPage from '../features/organization/InviteAcceptPage';
 import SupervisionQueuePage from '../features/supervision/SupervisionQueuePage';
 import SupervisionCaseDetailPage from '../features/supervision/SupervisionCaseDetailPage';
 
+// Feature 010 — Reportes y Estadísticas
+import ReportsDashboardPage from '../features/reports/ReportsDashboardPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -131,6 +134,7 @@ export default function AppRouter() {
                 <Route path="facturacion" element={<StaffInvoiceListPage />} />
                 <Route path="facturacion/:id" element={<StaffInvoiceDetailPage />} />
                 <Route path="reportes-financieros" element={<FinancialReportPage />} />
+                <Route path="reportes" element={<ReportsDashboardPage />} />
               </Route>
 
               {/* Telepsicología */}

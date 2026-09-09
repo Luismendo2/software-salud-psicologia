@@ -45,7 +45,7 @@ export default function MyAssessmentsPage() {
 
   return (
     <div className="portal-page">
-      <div className="portal-header">
+      <div className="portal-page-header">
         <h1>Mis Evaluaciones</h1>
         <p>Cuestionarios clínicos asignados por tu terapeuta.</p>
       </div>
@@ -66,7 +66,7 @@ export default function MyAssessmentsPage() {
               {pending.map(assm => {
                 const tpl = templates.find(t => t.id === assm.templateId);
                 return (
-                  <div key={assm.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--color-surface)', padding: 'var(--space-lg)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-sm)' }}>
+                  <div key={assm.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-md)', backgroundColor: 'var(--color-surface)', padding: 'var(--space-lg)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-sm)' }}>
                     <div>
                       <h4 style={{ margin: '0 0 var(--space-xs) 0', fontSize: '1.125rem' }}>{tpl?.name}</h4>
                       <p style={{ margin: 0, color: 'var(--color-gray-500)', fontSize: '0.875rem' }}>{tpl?.description}</p>

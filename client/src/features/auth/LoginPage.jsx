@@ -45,7 +45,15 @@ export default function LoginPage() {
         redirectPath = '/portal';
       }
 
-      const finalPath = from || redirectPath;
+      let finalPath = redirectPath;
+      if (from) {
+        if (result.user.role === 'PATIENT' && from.startsWith('/portal')) {
+          finalPath = from;
+        } else if (result.user.role !== 'PATIENT' && !from.startsWith('/portal')) {
+          finalPath = from;
+        }
+      }
+
       navigate(finalPath, { replace: true });
     } catch (err) {
       setError(err.message || 'Error al iniciar sesión.');

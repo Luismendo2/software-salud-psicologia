@@ -28,7 +28,7 @@ export default function ForbiddenPage() {
             </div>
           )}
           <div className="auth-forbidden-actions">
-            <Link to="/agenda" className="btn btn-primary">
+            <Link to={user?.role === 'PATIENT' ? '/portal' : '/agenda'} className="btn btn-primary">
               Ir al inicio
             </Link>
             <Link to="/login" className="btn btn-outline-secondary">

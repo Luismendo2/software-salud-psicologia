@@ -17,16 +17,16 @@
 - [ ] Implementar endpoint `GET /api/v1/reports/export` que reciba tipo (pdf/csv) e informe, y retorne un stream de archivo.
 
 ## Frontend - Dashboard
-- [ ] Crear el componente contenedor `ReportsDashboardPage` con selector de fechas global.
-- [ ] Crear el componente de filtros (mes actual, último trimestre, etc.).
-- [ ] Crear el `KpiCardsRow` para visualizar número de citas, ingresos totales, pacientes activos.
+- [x] Crear el componente contenedor `ReportsDashboardPage` con selector de fechas global.
+- [x] Crear el componente de filtros (mes actual, último trimestre, etc.).
+- [x] Crear el `KpiCardsRow` para visualizar número de citas, ingresos totales, pacientes activos.
 
 ## Frontend - Gráficos y Visualización
-- [ ] Instalar `Recharts`.
-- [ ] Construir `AppointmentsTrendChart` (gráfico de área) en base a los datos retornados.
-- [ ] Construir `ClinicalProgressChart` (gráfico de líneas superpuestas para promedios de tests).
-- [ ] Construir `PatientSourcesPieChart` (gráfico circular/anillo).
-- [ ] Añadir botón y menú desplegable para exportar a PDF o CSV conectándolo al endpoint de exportación.
+- [x] Instalar `Recharts`.
+- [x] Construir `AppointmentsTrendChart` (gráfico de área) en base a los datos retornados.
+- [x] Construir `ClinicalProgressChart` (gráfico de líneas superpuestas para promedios de tests).
+- [x] Construir `PatientSourcesPieChart` (gráfico circular/anillo).
+- [x] Añadir botón y menú desplegable para exportar a PDF o CSV conectándolo al endpoint de exportación.
 
 ## Testing
 - [ ] Escribir tests para los queries de agregación (crear datos de prueba en la BD y validar que la suma matemática del endpoint sea exacta).
