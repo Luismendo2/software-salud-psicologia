@@ -17,15 +17,15 @@
 - [ ] Crear endpoint GET para que el frontend consuma `aiInsights`.
 
 ## Frontend - UI del Editor de Notas
-- [ ] Implementar el componente `VoiceRecorderWidget` usando `navigator.mediaDevices.getUserMedia` (audio only) y `MediaRecorder`.
-- [ ] Integrar un visualizador básico (ondas o puntos saltando) para feedback de que está escuchando.
-- [ ] Conectar la parada de grabación al envío del blob al backend y colocar el texto resultante en el editor.
-- [ ] Añadir botón mágico ✨ "Generar Resumen" al lado del editor; implementar el componente `SessionSummaryPanel` con sus campos editables antes de aceptar el volcado final en la nota.
+- [x] Implementar el componente `VoiceRecorderWidget` usando `navigator.mediaDevices.getUserMedia` (audio only) y `MediaRecorder`.
+- [x] Integrar un visualizador básico (ondas o puntos saltando) para feedback de que está escuchando.
+- [x] Conectar la parada de grabación al envío del blob al backend y colocar el texto resultante en el editor. *(Simulado mediante servicio mock hasta integrar el backend.)*
+- [x] Añadir botón mágico ✨ "Generar Resumen" al lado del editor; implementar el componente `SessionSummaryPanel` con sus campos editables antes de aceptar el volcado final en la nota.
 
 ## Frontend - UI de Diagnóstico y Sidebar
-- [ ] Construir `DsmSupportPanel`. Al obtener sugerencias, cada una debe tener un botón que pegue el texto en el editor de la HC.
-- [ ] Mostrar siempre el disclaimer legal/clínico en los paneles de IA en rojo o advertencia clara.
-- [ ] Crear `AiInsightsCard` y colocarlo en el layout lateral de la página de historia clínica del paciente.
+- [x] Construir `DsmSupportPanel`. Al obtener sugerencias, cada una debe tener un botón que pegue el texto en el editor de la HC.
+- [x] Mostrar siempre el disclaimer legal/clínico en los paneles de IA en rojo o advertencia clara.
+- [x] Crear `AiInsightsCard` y colocarlo en el layout lateral de la página de historia clínica del paciente.
 
 ## Testing y Calidad
 - [ ] Escribir mocks para el módulo de OpenAI en los tests unitarios.

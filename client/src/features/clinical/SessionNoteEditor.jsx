@@ -16,6 +16,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { getClinicalTemplate, updateSessionNote, signSessionNote } from '../../services/clinicalService';
 import SubmitForSupervisionModal from '../supervision/SubmitForSupervisionModal';
+import VoiceRecorderWidget from './VoiceRecorderWidget';
+import SessionSummaryPanel from './SessionSummaryPanel';
+import DsmSupportPanel from './DsmSupportPanel';
 
 export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
   const [template, setTemplate] = useState(null);
@@ -24,6 +27,7 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
   const [lastSaved, setLastSaved] = useState(null);
   const [showSignModal, setShowSignModal] = useState(false);
   const [showSupervisionModal, setShowSupervisionModal] = useState(false);
+  const [showDsmSupport, setShowDsmSupport] = useState(false);
   const [signing, setSigning] = useState(false);
   const saveTimerRef = useRef(null);
 
@@ -60,6 +64,42 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
     const newContent = { ...content, [fieldKey]: value };
     setContent(newContent);
     debouncedSave(newContent);
+  };
+
+  const getPrimaryFieldKey = () => template?.fields?.[0]?.key || 'contenido';
+
+  const appendToNote = (html) => {
+    const fieldKey = getPrimaryFieldKey();
+    const newContent = {
+      ...content,
+      [fieldKey]: `${content[fieldKey] || ''}${content[fieldKey] ? '<br/>' : ''}${html}`,
+    };
+    setContent(newContent);
+    debouncedSave(newContent);
+  };
+
+  const handleTranscript = (transcript) => {
+    const safeText = transcript.replace(/[&<>]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[character]);
+    appendToNote(`<p>${safeText}</p>`);
+  };
+
+  const handleSummaryConfirm = async (summary) => {
+    const summaryHtml = `<section><p><strong>Resumen de sesión (revisado por profesional)</strong></p><p><strong>Objetivo:</strong> ${summary.objetivo}</p><p><strong>Intervención:</strong> ${summary.intervencion}</p><p><strong>Resultado:</strong> ${summary.resultado}</p><p><strong>Plan:</strong> ${summary.planSiguienteSesion}</p></section>`;
+    const fieldKey = getPrimaryFieldKey();
+    const newContent = { ...content, [fieldKey]: `${content[fieldKey] || ''}${content[fieldKey] ? '<br/>' : ''}${summaryHtml}` };
+    setContent(newContent);
+    setSaving(true);
+    try {
+      const updated = await updateSessionNote(note.id, { content: newContent, aiSummary: summary });
+      setLastSaved(new Date());
+      if (onSave) onSave(updated);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDsmInsert = (suggestion) => {
+    appendToNote(`<aside><p><strong>Sugerencia de apoyo diagnóstico IA (no confirmado)</strong></p><p><strong>${suggestion.code} — ${suggestion.name}</strong></p><p>${suggestion.rationale}</p></aside>`);
   };
 
   const handleManualSave = async () => {
@@ -138,6 +178,12 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
                 Guardar
               </button>
               <button
+                className="btn btn-outline-primary btn-sm"
+                onClick={() => setShowDsmSupport((visible) => !visible)}
+              >
+                {showDsmSupport ? 'Ocultar apoyo DSM' : 'Apoyo DSM-5'}
+              </button>
+              <button
                 className="btn btn-primary btn-sm"
                 onClick={() => setShowSignModal(true)}
               >
@@ -150,6 +196,16 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
 
       {/* ── Campos de la nota ── */}
       <div className="clinical-editor-fields">
+        {!readOnly && (
+          <>
+            <VoiceRecorderWidget disabled={saving} onTranscript={handleTranscript} />
+            <SessionSummaryPanel
+              noteContent={Object.values(content).join(' ')}
+              disabled={saving}
+              onConfirm={handleSummaryConfirm}
+            />
+          </>
+        )}
         {fields.map(field => (
           <div key={field.key} className="clinical-editor-field">
             <label className="clinical-field-label">{field.label}</label>
@@ -170,6 +226,9 @@ export default function SessionNoteEditor({ note, readOnly, onSave, onSign }) {
             )}
           </div>
         ))}
+        {!readOnly && showDsmSupport && (
+          <DsmSupportPanel disabled={saving} onInsert={handleDsmInsert} />
+        )}
       </div>
 
       {/* ── Modal de firma ── */}

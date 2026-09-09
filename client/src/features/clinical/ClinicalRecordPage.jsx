@@ -17,6 +17,7 @@ import SessionNotesTab from './SessionNotesTab';
 import AttachmentsTab from './AttachmentsTab';
 import GenogramTab from './GenogramTab';
 import AssessmentsPanel from './AssessmentsPanel';
+import AiInsightsCard from './AiInsightsCard';
 
 const TABS = [
   { key: 'notes',       label: 'Notas de sesión', icon: '📝' },
@@ -108,50 +109,29 @@ export default function ClinicalRecordPage() {
         </div>
       </div>
 
-      {/* ── Objetivos terapéuticos ── */}
-      {record.objectives && record.objectives.length > 0 && (
-        <div className="clinical-objectives">
-          <h3>Objetivos terapéuticos</h3>
-          <ol>
-            {record.objectives.map((obj, i) => (
-              <li key={i}>{obj}</li>
-            ))}
-          </ol>
+      <div className="clinical-record-workspace">
+        <div className="clinical-record-main">
+          {/* ── Objetivos terapéuticos ── */}
+          {record.objectives && record.objectives.length > 0 && (
+            <div className="clinical-objectives">
+              <h3>Objetivos terapéuticos</h3>
+              <ol>{record.objectives.map((obj, i) => <li key={i}>{obj}</li>)}</ol>
+            </div>
+          )}
+          {/* ── Tabs ── */}
+          <div className="clinical-tabs">
+            {TABS.map(tab => <button key={tab.key} className={`clinical-tab-btn ${activeTab === tab.key ? 'active' : ''}`} onClick={() => setActiveTab(tab.key)}><span className="clinical-tab-icon">{tab.icon}</span>{tab.label}</button>)}
+          </div>
+          <div className="clinical-tab-content">
+            {activeTab === 'notes' && <SessionNotesTab patientId={patientId} notes={notes} onNotesChange={setNotes} />}
+            {activeTab === 'attachments' && <AttachmentsTab patientId={patientId} />}
+            {activeTab === 'genogram' && <GenogramTab patientId={patientId} />}
+            {activeTab === 'assessments' && <AssessmentsPanel patientId={patientId} />}
+          </div>
         </div>
-      )}
-
-      {/* ── Tabs ── */}
-      <div className="clinical-tabs">
-        {TABS.map(tab => (
-          <button
-            key={tab.key}
-            className={`clinical-tab-btn ${activeTab === tab.key ? 'active' : ''}`}
-            onClick={() => setActiveTab(tab.key)}
-          >
-            <span className="clinical-tab-icon">{tab.icon}</span>
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* ── Contenido de la pestaña ── */}
-      <div className="clinical-tab-content">
-        {activeTab === 'notes' && (
-          <SessionNotesTab
-            patientId={patientId}
-            notes={notes}
-            onNotesChange={setNotes}
-          />
-        )}
-        {activeTab === 'attachments' && (
-          <AttachmentsTab patientId={patientId} />
-        )}
-        {activeTab === 'genogram' && (
-          <GenogramTab patientId={patientId} />
-        )}
-        {activeTab === 'assessments' && (
-          <AssessmentsPanel patientId={patientId} />
-        )}
+        <div className="clinical-record-aside">
+          <AiInsightsCard patientId={patientId} />
+        </div>
       </div>
     </div>
   );

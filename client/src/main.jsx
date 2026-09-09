@@ -4,6 +4,7 @@ import App from './App.jsx';
 
 // Importar CSS global (esto carga variables, reset y Bootstrap)
 import './styles/global.css';
+import './styles/ai-clinical.css';
 
 // Importar script de Bootstrap (necesario para el Offcanvas)
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
