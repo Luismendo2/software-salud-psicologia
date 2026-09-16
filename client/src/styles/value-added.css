@@ -1,0 +1,888 @@
+/* ==========================================================================
+   value-added.css — Estilos para Feature 012 (Valor Agregado e Innovación)
+   - PWA Install Banner
+   - Modo Crisis (Botón de cabecera y Modal de emergencia)
+   - Biblioteca Terapéutica (Catálogo, Filtros y Modales)
+   - Predicción de Ausencias (Badge de riesgo de no-show)
+   - Matching Inteligente de Terapeutas (Asistente y Resultados)
+   ========================================================================== */
+
+/* ── 1. PWA INSTALL BANNER ── */
+.pwa-banner {
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-accent-50) 100%);
+  border: 1px solid var(--color-primary-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  animation: pwaSlideDown 0.35s ease-out;
+}
+
+@keyframes pwaSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pwa-banner-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.pwa-banner-icon {
+  font-size: 2rem;
+  line-height: 1;
+  background: var(--color-surface);
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.pwa-banner-title {
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin-bottom: 2px;
+}
+
+.pwa-banner-subtitle {
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+.pwa-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.pwa-banner-install-btn {
+  background: var(--color-primary-600);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.pwa-banner-install-btn:hover {
+  background: var(--color-primary-700);
+  transform: translateY(-1px);
+}
+
+.pwa-banner-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-gray-500);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.pwa-banner-close-btn:hover {
+  color: var(--color-gray-800);
+  background: rgba(0,0,0,0.05);
+}
+
+/* ── 2. MODO CRISIS ── */
+.crisis-header-btn {
+  background: #dc2626;
+  color: #ffffff !important;
+  border: none;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-semibold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+  animation: crisisPulse 2.5s infinite;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.crisis-header-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.03);
+}
+
+@keyframes crisisPulse {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* Modal Crisis */
+.crisis-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  animation: crisisFadeIn 0.2s ease-out;
+}
+
+@keyframes crisisFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.crisis-modal-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  border-top: 6px solid #dc2626;
+  animation: crisisCardPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes crisisCardPop {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.crisis-modal-header {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-gray-200);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.crisis-modal-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.crisis-modal-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+.crisis-modal-body {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Disclaimer legal obligatorio */
+.crisis-disclaimer {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 0.75rem var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  color: #991b1b;
+  line-height: 1.45;
+}
+
+/* Llamada inmediata a línea nacional */
+.crisis-hotline-box {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+.crisis-hotline-info h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  color: #f8fafc;
+}
+
+.crisis-hotline-info p {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #cbd5e1;
+}
+
+.crisis-hotline-call-btn {
+  background: #22c55e;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-bold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.crisis-hotline-call-btn:hover {
+  background: #16a34a;
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+/* Protocolo personalizado del terapeuta */
+.crisis-section-title {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-xs);
+}
+
+.crisis-protocol-steps {
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.crisis-protocol-step {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--color-gray-800);
+}
+
+.crisis-protocol-step:last-child {
+  margin-bottom: 0;
+}
+
+.crisis-step-num {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-600);
+  min-width: 1.25rem;
+}
+
+/* Contactos de emergencia */
+.crisis-contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.crisis-contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem var(--space-md);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+}
+
+.crisis-contact-name {
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.875rem;
+  color: var(--color-gray-900);
+}
+
+.crisis-contact-rel {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+}
+
+.crisis-contact-btn {
+  padding: 0.375rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-300);
+  color: var(--color-gray-800);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.crisis-contact-btn:hover {
+  background: var(--color-primary-50);
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-700);
+}
+
+/* Botón alertar terapeuta */
+.crisis-alert-therapist-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
+}
+
+.crisis-alert-therapist-btn:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.crisis-alert-sent {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Pestaña de Configuración de Crisis (Historia Clínica) */
+.crisis-config-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+/* ── 3. PREDICCIÓN DE AUSENCIAS (NO-SHOW RISK BADGE) ── */
+.noshow-risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-full);
+  cursor: help;
+  position: relative;
+}
+
+.noshow-risk-badge--high {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.noshow-risk-badge--medium {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+.noshow-risk-badge--low {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+/* ── 4. BIBLIOTECA TERAPÉUTICA ── */
+.library-layout {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.library-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
+.library-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.library-header h1 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin: 0 0 0.25rem 0;
+}
+
+.library-header p {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+.library-search-bar {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.library-filter-group {
+  margin-bottom: var(--space-lg);
+}
+
+.library-filter-title {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.05em;
+}
+
+.library-filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--color-gray-700);
+  font-size: 0.8125rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.library-filter-option:hover {
+  background: var(--color-gray-100);
+}
+
+.library-filter-option.active {
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+  font-weight: var(--font-weight-semibold);
+}
+
+.library-filter-count {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  background: var(--color-gray-200);
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-full);
+}
+
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.library-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.library-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-200);
+}
+
+.library-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.library-format-badge {
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.library-format-badge--pdf {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.library-format-badge--docx {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.library-format-badge--mp4 {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.library-card-title {
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin: 0 0 0.35rem 0;
+  line-height: 1.35;
+}
+
+.library-card-desc {
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+  margin-bottom: var(--space-md);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.library-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.library-tag {
+  font-size: 0.6875rem;
+  background: var(--color-gray-100);
+  color: var(--color-gray-600);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.library-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-gray-100);
+  gap: var(--space-sm);
+}
+
+/* ── 5. MATCHING INTELIGENTE (ASISTENTE Y RESULTADOS) ── */
+.matching-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+  padding: 2.5rem 1rem 4rem;
+}
+
+.matching-container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.matching-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.matching-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: var(--color-accent-100);
+  color: var(--color-accent-600);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 0.75rem;
+}
+
+.matching-hero h1 {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.matching-hero p {
+  font-size: 1rem;
+  color: var(--color-gray-600);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Progreso del Wizard */
+.matching-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.matching-step-dot {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  background: var(--color-gray-200);
+  color: var(--color-gray-600);
+  transition: all 0.2s ease;
+}
+
+.matching-step-dot.active {
+  background: var(--color-primary-600);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--color-primary-100);
+}
+
+.matching-step-dot.completed {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.matching-step-line {
+  width: 2.5rem;
+  height: 2px;
+  background: var(--color-gray-300);
+}
+
+.matching-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-200);
+}
+
+.matching-question-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.matching-question-sub {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  margin-bottom: 1.5rem;
+}
+
+.matching-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.matching-chip {
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-gray-300);
+  background: var(--color-surface);
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.matching-chip:hover {
+  border-color: var(--color-primary-400);
+  background: var(--color-primary-50);
+}
+
+.matching-chip.selected {
+  background: var(--color-primary-600);
+  color: #ffffff;
+  border-color: var(--color-primary-600);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+/* Tarjetas de terapeutas sugeridos */
+.match-result-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.match-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-400);
+}
+
+.match-result-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.match-result-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-accent-500));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+.match-result-identity {
+  flex: 1;
+  min-width: 0;
+}
+
+.match-result-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.match-result-name {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.match-score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.match-result-meta {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  line-height: 1.35;
+}
+
+.match-result-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.match-result-bio {
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.match-result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.match-result-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-gray-100);
+  flex-wrap: wrap;
+}
+
+.match-result-book-btn {
+  padding: 0.625rem 1.25rem;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .library-layout {
+    flex-direction: column;
+  }
+  .library-sidebar {
+    width: 100%;
+  }
+  .pwa-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pwa-banner-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 576px) {
+  .match-result-card {
+    padding: 1.125rem;
+  }
+  .match-result-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.05rem;
+  }
+  .match-result-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .match-result-book-btn {
+    width: 100%;
+  }
+}

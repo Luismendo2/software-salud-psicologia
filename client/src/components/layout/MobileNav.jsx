@@ -65,6 +65,9 @@ export default function MobileNav() {
               <NavLink to="/telepsicologia" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
                 📹 Telepsicología
               </NavLink>
+              <NavLink to="/biblioteca" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
+                📚 Biblioteca
+              </NavLink>
               <NavLink to="/facturacion" className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>
                 💳 Facturación y Pagos
               </NavLink>

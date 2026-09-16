@@ -66,6 +66,10 @@ import SupervisionCaseDetailPage from '../features/supervision/SupervisionCaseDe
 // Feature 010 — Reportes y Estadísticas
 import ReportsDashboardPage from '../features/reports/ReportsDashboardPage';
 
+// Feature 012 — Valor Agregado e Innovación
+import LibraryPage from '../features/library/LibraryPage';
+import MatchingWizardPage from '../features/matching/MatchingWizardPage';
+
 // Feature 002 — Portal del Paciente
 import PatientDashboard from '../features/portal/PatientDashboard';
 import AppointmentHistoryPage from '../features/portal/AppointmentHistoryPage';
@@ -88,6 +92,8 @@ export default function AppRouter() {
           <Route path="/invite/:orgId/:token" element={<InviteAcceptPage />} />
           
           <Route path="/book/:psychologistSlug" element={<BookingPublicPage />} />
+          <Route path="/matching" element={<MatchingWizardPage />} />
+          <Route path="/encontrar-terapeuta" element={<MatchingWizardPage />} />
 
           {/* ── Portal del Paciente (Protegido) ── */}
           <Route element={<ProtectedRoute allowedRoles={['PATIENT']} />}>
@@ -140,6 +146,7 @@ export default function AppRouter() {
               {/* Telepsicología */}
               <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'PSYCHOLOGIST']} />}>
                 <Route path="telepsicologia" element={<SessionsListPage />} />
+                <Route path="biblioteca" element={<LibraryPage />} />
               </Route>
 
               {/* Comunicación y Seguimiento */}

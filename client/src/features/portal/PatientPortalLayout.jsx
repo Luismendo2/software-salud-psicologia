@@ -7,11 +7,14 @@
    En desktop usa una barra lateral compacta.
    ========================================================================== */
 
+import { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
+import CrisisModal from './CrisisModal';
 
 export default function PatientPortalLayout() {
   const { user, logout } = useAuth();
+  const [showCrisisModal, setShowCrisisModal] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -26,14 +29,32 @@ export default function PatientPortalLayout() {
           <span className="portal-brand-text">PsiAgenda</span>
           {user && <span className="portal-brand-badge">{user.firstName} {user.lastName}</span>}
         </div>
-        <button
-          className="portal-logout-btn"
-          onClick={handleLogout}
-          title="Cerrar sesión"
-        >
-          Salir
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <button
+            type="button"
+            className="crisis-header-btn"
+            onClick={() => setShowCrisisModal(true)}
+            title="Centro de ayuda y soporte en crisis"
+            aria-label="Necesito ayuda ahora"
+          >
+            <span>🚨</span>
+            <span>Necesito ayuda ahora</span>
+          </button>
+          <button
+            className="portal-logout-btn"
+            onClick={handleLogout}
+            title="Cerrar sesión"
+          >
+            Salir
+          </button>
+        </div>
       </header>
+
+      <CrisisModal
+        isOpen={showCrisisModal}
+        onClose={() => setShowCrisisModal(false)}
+        user={user}
+      />
 
       {/* ── Contenido principal ── */}
       <main className="portal-main">

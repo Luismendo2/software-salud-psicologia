@@ -18,12 +18,14 @@ import AttachmentsTab from './AttachmentsTab';
 import GenogramTab from './GenogramTab';
 import AssessmentsPanel from './AssessmentsPanel';
 import AiInsightsCard from './AiInsightsCard';
+import CrisisConfigTab from './CrisisConfigTab';
 
 const TABS = [
   { key: 'notes',       label: 'Notas de sesión', icon: '📝' },
   { key: 'attachments', label: 'Archivos',        icon: '📎' },
   { key: 'genogram',    label: 'Genograma',        icon: '🌳' },
   { key: 'assessments', label: 'Evaluaciones',     icon: '📊' },
+  { key: 'crisis',      label: 'Modo Crisis',      icon: '🚨' },
 ];
 
 export default function ClinicalRecordPage() {
@@ -127,6 +129,7 @@ export default function ClinicalRecordPage() {
             {activeTab === 'attachments' && <AttachmentsTab patientId={patientId} />}
             {activeTab === 'genogram' && <GenogramTab patientId={patientId} />}
             {activeTab === 'assessments' && <AssessmentsPanel patientId={patientId} />}
+            {activeTab === 'crisis' && <CrisisConfigTab patientId={patientId} />}
           </div>
         </div>
         <div className="clinical-record-aside">

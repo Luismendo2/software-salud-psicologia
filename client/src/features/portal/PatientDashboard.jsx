@@ -12,6 +12,7 @@ import { getPatientProfile, getUpcomingAppointments, getConsents } from '../../s
 import * as commService from '../../services/communicationService';
 import StatusBadge from '../agenda/StatusBadge';
 import PostSessionSurveyModal from './PostSessionSurveyModal';
+import PwaInstallBanner from './PwaInstallBanner';
 import { useAuth } from '../auth/AuthContext';
 
 export default function PatientDashboard() {
@@ -97,6 +98,9 @@ export default function PatientDashboard() {
         </h1>
         <p>Este es tu espacio personal de bienestar.</p>
       </div>
+
+      {/* ── Banner PWA ── */}
+      <PwaInstallBanner />
 
       {/* ── Alertas pendientes ── */}
       {alerts.length > 0 && (

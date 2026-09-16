@@ -38,6 +38,9 @@ export const mockAppointments = [
     type: 'PRESENCIAL',
     status: 'CONFIRMED',
     notes: 'Sesión de seguimiento — ansiedad generalizada',
+    noShowScore: 35,
+    noShowRisk: 'HIGH',
+    extraReminders: ['8h', '2h'],
   },
   {
     id: '2',
@@ -49,6 +52,8 @@ export const mockAppointments = [
     type: 'VIRTUAL',
     status: 'PENDING',
     notes: 'Primera consulta — derivación desde médico general',
+    noShowScore: 10,
+    noShowRisk: 'LOW',
   },
   {
     id: '3',
@@ -60,6 +65,8 @@ export const mockAppointments = [
     type: 'PRESENCIAL',
     status: 'CONFIRMED',
     notes: 'Terapia cognitivo-conductual — sesión 8',
+    noShowScore: 24,
+    noShowRisk: 'MEDIUM',
   },
 
   // ── Mañana ──

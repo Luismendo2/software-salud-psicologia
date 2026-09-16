@@ -7,6 +7,7 @@
    ========================================================================== */
 
 import StatusBadge from './StatusBadge';
+import NoShowRiskBadge from './NoShowRiskBadge';
 
 /**
  * Formatea una fecha ISO a hora local legible (ej. "9:00 a. m.")
@@ -57,13 +58,18 @@ export default function AppointmentCard({ appointment, onClick }) {
           </div>
         </div>
 
-        {/* ── Nombre del paciente ── */}
-        <div style={{
+        {/* ── Nombre del paciente + Indicador de riesgo No-Show (CA-09) ── */}
+        <div className="d-flex align-items-center justify-content-between gap-1" style={{
           fontSize: '0.875rem',
           fontWeight: 'var(--font-weight-medium)',
           color: 'var(--color-gray-900)',
         }}>
-          {patientName}
+          <span>{patientName}</span>
+          <NoShowRiskBadge
+            score={appointment.noShowScore}
+            riskLevel={appointment.noShowRisk}
+            extraReminders={appointment.extraReminders}
+          />
         </div>
 
         {/* ── Nota breve (si existe) ── */}

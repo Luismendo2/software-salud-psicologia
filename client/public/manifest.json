@@ -1,0 +1,19 @@
+{
+  "name": "PsiAgenda — Portal del Paciente",
+  "short_name": "PsiAgenda",
+  "description": "Tu espacio seguro de salud mental, citas y seguimiento terapéutico.",
+  "start_url": "/portal",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0f4f8",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["medical", "health", "lifestyle"]
+}

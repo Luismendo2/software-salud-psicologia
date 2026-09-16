@@ -147,6 +147,17 @@ export default function LoginPage() {
           </button>
         </form>
 
+        <div className="my-3">
+          <Link
+            to="/matching"
+            className="auth-matching-btn"
+            title="Encuentra tu terapeuta ideal con nuestro asistente interactivo"
+          >
+            <span aria-hidden="true">✨</span>
+            <span>¿Buscas terapeuta? <strong>Matching Inteligente</strong> →</span>
+          </Link>
+        </div>
+
         {/* ── Panel de cuentas demo ── */}
         <div className="auth-demo-panel">
           <div className="auth-demo-title">Cuentas de demostración</div>

@@ -60,6 +60,12 @@ export default function Sidebar() {
               <span className="sidebar-icon">📹</span>
               Telepsicología
             </NavLink>
+            <NavLink to="/biblioteca" className={({ isActive }) =>
+              `sidebar-link ${isActive ? 'active' : ''}`
+            }>
+              <span className="sidebar-icon">📚</span>
+              Biblioteca
+            </NavLink>
             <NavLink to="/facturacion" className={({ isActive }) =>
               `sidebar-link ${isActive ? 'active' : ''}`
             }>
