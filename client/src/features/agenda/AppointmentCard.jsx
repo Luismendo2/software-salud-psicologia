@@ -40,37 +40,46 @@ export default function AppointmentCard({ appointment, onClick }) {
       onKeyDown={(e) => e.key === 'Enter' && onClick?.(appointment)}
     >
       <div className="card-body py-2 px-3">
-        {/* ── Fila superior: hora + badges ── */}
-        <div className="d-flex align-items-center justify-content-between mb-1">
+        {/* ── Fila superior: Hora + Estado ── */}
+        <div className="d-flex align-items-center justify-content-between mb-1 gap-2">
           <span style={{
             fontSize: '0.8125rem',
             fontWeight: 'var(--font-weight-semibold)',
-            color: 'var(--color-gray-800)',
+            color: 'var(--color-primary-700, #1d4ed8)',
+            whiteSpace: 'nowrap',
           }}>
-            {formatTime(startTime)} – {formatTime(endTime)}
+            🕒 {formatTime(startTime)} – {formatTime(endTime)}
           </span>
+          <StatusBadge status={status} />
+        </div>
 
-          <div className="d-flex gap-1">
-            <span className={`badge-type badge-type--${type.toLowerCase()}`}>
-              {type === 'VIRTUAL' ? '💻 Virtual' : '🏥 Presencial'}
-            </span>
-            <StatusBadge status={status} />
+        {/* ── Fila media: Nombre del paciente + Tipo de sesión ── */}
+        <div className="d-flex align-items-center justify-content-between gap-2 mb-1">
+          <span style={{
+            fontSize: '0.875rem',
+            fontWeight: 'var(--font-weight-medium)',
+            color: 'var(--color-gray-900)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }} title={patientName}>
+            {patientName}
+          </span>
+          <span className={`badge-type badge-type--${type.toLowerCase()}`} style={{ flexShrink: 0 }}>
+            {type === 'VIRTUAL' ? '💻 Virtual' : '🏥 Presencial'}
+          </span>
+        </div>
+
+        {/* ── Indicador de riesgo No-Show (si existe predicción) ── */}
+        {(appointment.noShowScore !== undefined && appointment.noShowScore !== null) && (
+          <div className="d-flex align-items-center gap-1 mt-1 mb-1">
+            <NoShowRiskBadge
+              score={appointment.noShowScore}
+              riskLevel={appointment.noShowRisk}
+              extraReminders={appointment.extraReminders}
+            />
           </div>
-        </div>
-
-        {/* ── Nombre del paciente + Indicador de riesgo No-Show (CA-09) ── */}
-        <div className="d-flex align-items-center justify-content-between gap-1" style={{
-          fontSize: '0.875rem',
-          fontWeight: 'var(--font-weight-medium)',
-          color: 'var(--color-gray-900)',
-        }}>
-          <span>{patientName}</span>
-          <NoShowRiskBadge
-            score={appointment.noShowScore}
-            riskLevel={appointment.noShowRisk}
-            extraReminders={appointment.extraReminders}
-          />
-        </div>
+        )}
 
         {/* ── Nota breve (si existe) ── */}
         {notes && (
@@ -81,8 +90,8 @@ export default function AppointmentCard({ appointment, onClick }) {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
-          }}>
-            {notes}
+          }} title={notes}>
+            📝 {notes}
           </div>
         )}
       </div>

@@ -90,6 +90,14 @@ export default function MessageInboxPage() {
     }
   };
 
+  const isSentByMe = (msg) => {
+    return (
+      msg.senderId === user.id ||
+      msg.senderId === 'p1' ||
+      (user?.role === 'PATIENT' && String(msg.senderId).startsWith('p'))
+    );
+  };
+
   const activeConv = conversations.find(c => c.id === activeConvId);
 
   if (loading) {
@@ -122,12 +130,12 @@ export default function MessageInboxPage() {
             </div>
 
             <div className="chat-messages" ref={chatMessagesRef}>
-              {messages.map(msg => (
-                <div key={msg.id} className={`chat-bubble ${msg.senderId === user.id ? 'sent' : 'received'}`}>
+              {messages.map((msg, idx) => (
+                <div key={`${msg.id}-${idx}`} className={`chat-bubble ${isSentByMe(msg) ? 'sent' : 'received'}`}>
                   <div>{msg.content}</div>
                   <div className="chat-bubble-time">
                     {new Date(msg.createdAt).toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' })}
-                    {msg.senderId === user.id && msg.readAt && ' ✓✓'}
+                    {isSentByMe(msg) && msg.readAt && ' ✓✓'}
                   </div>
                 </div>
               ))}

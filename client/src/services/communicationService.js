@@ -35,7 +35,7 @@ export async function getMessages(conversationId, after = null) {
 export async function sendMessage(conversationId, senderId, senderName, content) {
   await delay(300);
   const newMsg = {
-    id: `msg-${Date.now()}`,
+    id: `msg-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     conversationId,
     senderId,
     senderName,

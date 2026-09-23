@@ -161,23 +161,23 @@ export default function MemberManagementPage() {
                         {member.isActive ? 'Activo' : 'Inactivo'}
                       </span>
                     </td>
-                    <td data-label="Acciones" style={{ textAlign: 'right' }}>
-                      <button 
-                        className="btn btn-outline-secondary" 
-                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', marginRight: '8px' }}
-                        onClick={() => openRoleModal(member)}
-                        disabled={member.orgRole === 'OWNER'}
-                      >
-                        Cambiar Rol
-                      </button>
-                      <button 
-                        className="btn btn-outline-secondary" 
-                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', color: member.isActive ? 'var(--color-danger)' : 'var(--color-success)' }}
-                        onClick={() => handleToggleActive(member)}
-                        disabled={member.orgRole === 'OWNER'}
-                      >
-                        {member.isActive ? 'Desactivar' : 'Reactivar'}
-                      </button>
+                    <td data-label="Acciones" className="member-actions-cell">
+                      <div className="member-actions-group">
+                        <button 
+                          className="btn btn-outline-secondary btn-sm" 
+                          onClick={() => openRoleModal(member)}
+                          disabled={member.orgRole === 'OWNER'}
+                        >
+                          Cambiar Rol
+                        </button>
+                        <button 
+                          className={`btn btn-outline-secondary btn-sm ${member.isActive ? 'btn-member-deactivate' : 'btn-member-activate'}`}
+                          onClick={() => handleToggleActive(member)}
+                          disabled={member.orgRole === 'OWNER'}
+                        >
+                          {member.isActive ? 'Desactivar' : 'Reactivar'}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

@@ -323,7 +323,9 @@ h3 { font-size: 1.25rem; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-sm) var(--space-md);
+  padding: 0 var(--space-md);
+  height: 54px;
+  box-sizing: border-box;
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-gray-100);
   position: sticky;

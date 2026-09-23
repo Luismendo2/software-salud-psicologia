@@ -60,12 +60,21 @@ export default function MessagingPage() {
 
   // Auto scroll solo cuando cambia la conversación
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setTimeout(() => {
       if (chatMessagesRef.current) {
         chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
       }
     }, 100);
   }, [activeConvId]);
+
+  const isSentByMe = (msg) => {
+    return (
+      msg.senderId === user.id ||
+      msg.senderId === 'psy1' ||
+      (user?.role === 'PSYCHOLOGIST' && String(msg.senderId).startsWith('psy'))
+    );
+  };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -158,9 +167,10 @@ export default function MessagingPage() {
         {/* Panel de chat */}
         <div className="chat-panel">
           {!activeConv ? (
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', color: 'var(--color-gray-400)' }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💬</div>
-              <p>Selecciona una conversación para empezar</p>
+            <div className="chat-empty-state">
+              <div className="chat-empty-state-icon">💬</div>
+              <h3 className="chat-empty-state-title">Mensajes PsiAgenda</h3>
+              <p className="chat-empty-state-text">Selecciona una conversación de la lista para empezar</p>
             </div>
           ) : (
             <>
@@ -173,30 +183,30 @@ export default function MessagingPage() {
                     window.scrollTo({ top: 0, behavior: 'instant' });
                   }}
                   aria-label="Volver a la lista de conversaciones"
+                  title="Volver"
                 >
                   <span className="chat-back-arrow">←</span>
-                  <span className="chat-back-label">Chats</span>
                 </button>
                 <div className="conversation-avatar">
                   {activeConv.patientName.split(' ').map(w => w[0]).join('').slice(0, 2)}
                 </div>
                 <div className="chat-header-user-info">
-                  <div style={{ fontWeight: 'var(--font-weight-semibold)', fontSize: '0.9375rem', color: 'var(--color-gray-900)' }}>
+                  <div style={{ fontWeight: 'var(--font-weight-semibold)', fontSize: '0.9375rem', color: 'var(--color-gray-900)', lineHeight: 1.2 }}>
                     {activeConv.patientName}
                   </div>
-                  <div style={{ fontSize: '0.6875rem', color: 'var(--color-gray-500)' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--color-gray-500)', marginTop: '2px' }}>
                     Paciente
                   </div>
                 </div>
               </div>
 
               <div className="chat-messages" ref={chatMessagesRef}>
-                {messages.map(msg => (
-                  <div key={msg.id} className={`chat-bubble ${msg.senderId === user.id ? 'sent' : 'received'}`}>
+                {messages.map((msg, idx) => (
+                  <div key={`${msg.id}-${idx}`} className={`chat-bubble ${isSentByMe(msg) ? 'sent' : 'received'}`}>
                     <div>{msg.content}</div>
                     <div className="chat-bubble-time">
                       {new Date(msg.createdAt).toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' })}
-                      {msg.senderId === user.id && msg.readAt && ' ✓✓'}
+                      {isSentByMe(msg) && msg.readAt && ' ✓✓'}
                     </div>
                   </div>
                 ))}

@@ -673,8 +673,8 @@
   background: var(--color-primary-600);
 }
 
-/* ── Chat Panel ── */
-.chat-panel {
+/* ── Chat Panel (Video Sesión) ── */
+.video-session-page .chat-panel {
   width: 320px;
   background: var(--color-surface);
   display: flex;
@@ -858,7 +858,7 @@
     grid-template-columns: 1fr;
   }
 
-  .chat-panel {
+  .video-session-page .chat-panel {
     position: absolute;
     top: 0;
     right: 0;
