@@ -5,7 +5,7 @@
    Incluye menú hamburguesa simplificado con integración de AuthContext.
    ========================================================================== */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../features/auth/AuthContext';
 import { ROLE_LABELS } from '../../mocks/authMock';
@@ -15,6 +15,18 @@ export default function MobileNav() {
   const { user, logout, hasRole } = useAuth();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Bloquear el scroll de la página de fondo cuando el menú está abierto
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!user) return null;
 
@@ -34,23 +46,12 @@ export default function MobileNav() {
         </button>
       </header>
 
-      {/* ── Menú desplegable ── */}
+      {/* ── Menú desplegable móvil (con scroll interno dedicado) ── */}
       {isOpen && (
-        <div style={{
-          backgroundColor: 'var(--color-surface)',
-          borderBottom: '1px solid var(--color-gray-200)',
-          position: 'sticky',
-          top: '53px',
-          zIndex: 1010,
-          padding: 'var(--space-md)',
-          boxShadow: 'var(--shadow-md)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--space-sm)'
-        }}>
-          <div style={{ paddingBottom: 'var(--space-sm)', borderBottom: '1px solid var(--color-gray-100)', marginBottom: 'var(--space-sm)' }}>
-            <div style={{ fontWeight: 'var(--font-weight-bold)' }}>{user.firstName} {user.lastName}</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)' }}>{ROLE_LABELS[user.role] || user.role}</div>
+        <div className="mobile-nav-drawer">
+          <div className="mobile-nav-user-header">
+            <div className="mobile-nav-user-name">{user.firstName} {user.lastName}</div>
+            <div className="mobile-nav-user-role">{ROLE_LABELS[user.role] || user.role}</div>
           </div>
 
           <NavLink to="/agenda" end className="btn btn-outline-secondary" onClick={toggleMenu} style={{ textAlign: 'left' }}>

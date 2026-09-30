@@ -150,7 +150,7 @@ export default function AgendaPage() {
       <div className="row g-4">
         {/* Calendario (ocupa la mayor parte del espacio) */}
         <div className="col-12 col-xl-9">
-          <div className="card">
+          <div className="card agenda-calendar-card">
             <div className="card-body">
               {loading ? (
                 <div className="text-center py-5" style={{ color: 'var(--color-gray-400)' }}>
