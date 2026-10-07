@@ -45,9 +45,25 @@ export async function getVideoSessions({ status, psychologistId } = {}) {
 export async function getVideoSession(appointmentId) {
   await delay(300);
 
-  const session = sessionsStore.find(s => s.appointmentId === appointmentId);
+  let session = sessionsStore.find(s => s.appointmentId === appointmentId);
   if (!session) {
-    throw new Error(`Sesión de video para cita ${appointmentId} no encontrada.`);
+    session = {
+      id: `vs-${appointmentId}`,
+      appointmentId,
+      patientId: 'pat-002',
+      patientName: 'Carlos Mendoza',
+      psychologistId: 'psy-001',
+      psychologistName: 'Dra. María López',
+      dailyRoomName: `psiagenda-${appointmentId}`,
+      dailyRoomUrl: `https://psiagenda.daily.co/psiagenda-${appointmentId}`,
+      status: 'WAITING',
+      scheduledAt: new Date().toISOString(),
+      startedAt: null,
+      endedAt: null,
+      concept: 'Consulta psicológica virtual',
+      createdAt: new Date().toISOString(),
+    };
+    sessionsStore.push(session);
   }
 
   return { ...session };

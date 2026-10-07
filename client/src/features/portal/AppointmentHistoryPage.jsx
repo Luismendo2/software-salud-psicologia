@@ -7,6 +7,7 @@
    ========================================================================== */
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getUpcomingAppointments, getPastAppointments } from '../../services/patientService';
 import StatusBadge from '../agenda/StatusBadge';
 
@@ -101,6 +102,17 @@ export default function AppointmentHistoryPage() {
                     {apt.type === 'VIRTUAL' ? '💻 Virtual' : '🏥 Presencial'}
                   </span>
                 </div>
+                {apt.type === 'VIRTUAL' && apt.status !== 'CANCELLED' && (
+                  <div style={{ marginTop: '0.6rem' }}>
+                    <Link
+                      to={`/session/${apt.id}/waiting-room`}
+                      className="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1"
+                    >
+                      <span>📹</span>
+                      <span>Entrar a la videollamada</span>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           ))

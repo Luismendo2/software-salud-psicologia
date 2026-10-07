@@ -152,6 +152,17 @@ export default function PatientDashboard() {
                   {nextAppointment.type === 'VIRTUAL' ? '💻 Virtual' : '🏥 Presencial'}
                 </span>
               </div>
+              {nextAppointment.type === 'VIRTUAL' && nextAppointment.status !== 'CANCELLED' && (
+                <div style={{ marginTop: '0.75rem' }}>
+                  <Link
+                    to={`/session/${nextAppointment.id}/waiting-room`}
+                    className="btn btn-primary btn-sm d-inline-flex align-items-center gap-2"
+                  >
+                    <span>📹</span>
+                    <span>Entrar a la videollamada</span>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
