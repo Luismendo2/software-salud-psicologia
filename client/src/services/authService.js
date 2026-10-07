@@ -47,9 +47,13 @@ export async function refreshToken() {
   return { accessToken: `mock-jwt-refreshed-${Date.now()}` };
 }
 
-export async function getCurrentUser() {
+export async function getCurrentUser(userId) {
   await delay(300);
-  // Simula GET /auth/me — retorna el psicólogo por defecto
+  if (userId) {
+    const user = MOCK_USERS.find(u => u.id === userId);
+    if (user) return { ...user };
+  }
+  // Simula GET /auth/me — retorna el psicólogo por defecto si no hay id guardado
   return { ...MOCK_USERS[0] };
 }
 

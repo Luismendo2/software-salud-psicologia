@@ -181,6 +181,14 @@ export default function LoginPage() {
             <button
               type="button"
               className="auth-demo-btn"
+              onClick={() => fillDemo('carlos.mendoza@correo.co', 'Paciente@1')}
+            >
+              <span className="auth-demo-role auth-demo-role--patient">Paciente</span>
+              <span className="auth-demo-email">carlos.mendoza@correo.co</span>
+            </button>
+            <button
+              type="button"
+              className="auth-demo-btn"
               onClick={() => fillDemo('ana.secretaria@psiagenda.co', 'Asistente@1')}
             >
               <span className="auth-demo-role auth-demo-role--assistant">Asistente</span>

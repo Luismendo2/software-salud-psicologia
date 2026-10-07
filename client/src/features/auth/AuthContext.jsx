@@ -32,10 +32,9 @@ export function AuthProvider({ children }) {
   const checkSession = async () => {
     try {
       // En producción esto haría un /auth/refresh con la cookie
-      // En mocks simplemente cargamos el usuario por defecto
-      const savedUserId = sessionStorage.getItem('psiagenda_user_id');
+      const savedUserId = localStorage.getItem('psiagenda_user_id') || sessionStorage.getItem('psiagenda_user_id');
       if (savedUserId) {
-        const currentUser = await authService.getCurrentUser();
+        const currentUser = await authService.getCurrentUser(savedUserId);
         setUser(currentUser);
         setAccessToken(`mock-restored-${Date.now()}`);
       }
@@ -52,6 +51,7 @@ export function AuthProvider({ children }) {
     const result = await authService.login(email, password);
     setUser(result.user);
     setAccessToken(result.accessToken);
+    localStorage.setItem('psiagenda_user_id', result.user.id);
     sessionStorage.setItem('psiagenda_user_id', result.user.id);
     return result;
   }, []);
@@ -62,6 +62,7 @@ export function AuthProvider({ children }) {
     } finally {
       setUser(null);
       setAccessToken(null);
+      localStorage.removeItem('psiagenda_user_id');
       sessionStorage.removeItem('psiagenda_user_id');
     }
   }, []);

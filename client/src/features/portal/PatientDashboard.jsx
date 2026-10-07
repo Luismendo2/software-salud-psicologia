@@ -33,7 +33,7 @@ export default function PatientDashboard() {
         getPatientProfile(),
         getUpcomingAppointments(),
         getConsents(),
-        commService.getPendingSurvey(user.id),
+        commService.getPendingSurvey(user?.id || 'usr-3'),
       ]);
 
       setProfile(profileData);
